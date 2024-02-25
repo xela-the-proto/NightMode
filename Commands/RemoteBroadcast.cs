@@ -11,7 +11,7 @@ namespace NightMode.Commands
         
         public string Command { get; } = "broadcast";
         public string[] Aliases { get; } = new string[] { "bc" };
-        public string Description { get; } = "Broadcast to the server directly";
+        public string Description { get; } = "Broadcast to the server directly like if you were in remoteadmin";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {

@@ -16,5 +16,9 @@ namespace NightMode
 
         [Description("Lock the radio on UL")] 
         public bool UL { get; set; } = true;
+
+        [Description("Make the battery of the radio not drain")]
+        public bool RadioDrain { get; set; } = true;
+
     }
 }

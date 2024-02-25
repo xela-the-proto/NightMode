@@ -4,7 +4,6 @@ using HarmonyLib;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using NightMode.API;
-using static NightMode.Config;
 using server = Exiled.Events.Handlers.Server;
 using player = Exiled.Events.Handlers.Player;
 
@@ -66,18 +65,26 @@ namespace NightMode
         
         private void RegisterEvents()
         {
-            player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
-            player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
-            player.Left += Handlers.Player.OnPlayerLeft;
-            player.Joined += Handlers.Player.OnPlayerJoin;
+            if (Instance.Config.RadioDrain)
+            {
+                player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
+            }
+            if (Instance.Config.UL)
+            {
+                player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
+            }
         }
 
         private void UnregisterEvents()
         {
-            player.Left -= Handlers.Player.OnPlayerLeft;
-            player.Joined -= Handlers.Player.OnPlayerJoin;
-            player.UsingRadioBattery -= Handlers.Player.OnPlayerUsingRadioBattery;
-            player.ChangingRadioPreset -= Handlers.Player.OnPlayerChangingRadioRange;
+            if (Instance.Config.RadioDrain)
+            {
+                player.UsingRadioBattery -= Handlers.Player.OnPlayerUsingRadioBattery;
+            }
+            if (Instance.Config.UL)
+            {
+                player.ChangingRadioPreset -= Handlers.Player.OnPlayerChangingRadioRange;
+            }
         }
             
     }
