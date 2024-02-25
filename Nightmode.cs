@@ -4,6 +4,7 @@ using HarmonyLib;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using NightMode.API;
+using static NightMode.Config;
 using server = Exiled.Events.Handlers.Server;
 using player = Exiled.Events.Handlers.Player;
 
@@ -25,6 +26,7 @@ namespace NightMode
         public override void OnEnabled()
         {
             base.OnEnabled();
+            
             RegisterEvents();
             Patch();
         }
@@ -65,7 +67,7 @@ namespace NightMode
         private void RegisterEvents()
         {
             player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
-            player.TogglingRadio += Handlers.Player.OnPlayerTogglingRadio;
+            player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
             player.Left += Handlers.Player.OnPlayerLeft;
             player.Joined += Handlers.Player.OnPlayerJoin;
         }
@@ -75,7 +77,7 @@ namespace NightMode
             player.Left -= Handlers.Player.OnPlayerLeft;
             player.Joined -= Handlers.Player.OnPlayerJoin;
             player.UsingRadioBattery -= Handlers.Player.OnPlayerUsingRadioBattery;
-            player.TogglingRadio -= Handlers.Player.OnPlayerTogglingRadio;
+            player.ChangingRadioPreset -= Handlers.Player.OnPlayerChangingRadioRange;
         }
             
     }
