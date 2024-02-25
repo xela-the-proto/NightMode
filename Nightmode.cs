@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using HarmonyLib;
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using Exiled.Loader;
 using NightMode.API;
 using server = Exiled.Events.Handlers.Server;
 using player = Exiled.Events.Handlers.Player;
-using Player = Exiled.Events.Handlers.Player;
 
 namespace NightMode
 {
@@ -18,9 +16,7 @@ namespace NightMode
         private Nightmode() { }
 
         public override PluginPriority Priority { get; } = PluginPriority.Default;
-
-        private Handlers.Server server;
-        private Handlers.Player player;
+        
         public static readonly Dictionary<string, PlayerData> PlayerData = new Dictionary<string, PlayerData>();
 
         private int _patchesCounter;
@@ -68,19 +64,18 @@ namespace NightMode
         
         private void RegisterEvents()
         {
-            server = new Handlers.Server();
-            player = new Handlers.Player();
-                
-            Player.Left += Handlers.Player.OnPlayerLeft;
-            Player.Joined += Handlers.Player.OnPlayerJoin;
+            player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
+            player.TogglingRadio += Handlers.Player.OnPlayerTogglingRadio;
+            player.Left += Handlers.Player.OnPlayerLeft;
+            player.Joined += Handlers.Player.OnPlayerJoin;
         }
 
         private void UnregisterEvents()
         {
-            Player.Left -= Handlers.Player.OnPlayerLeft;
-            Player.Joined -= Handlers.Player.OnPlayerJoin;
-            server = null;
-            player = null;  
+            player.Left -= Handlers.Player.OnPlayerLeft;
+            player.Joined -= Handlers.Player.OnPlayerJoin;
+            player.UsingRadioBattery -= Handlers.Player.OnPlayerUsingRadioBattery;
+            player.TogglingRadio -= Handlers.Player.OnPlayerTogglingRadio;
         }
             
     }
