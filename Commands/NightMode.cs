@@ -19,6 +19,12 @@ public class NightMode : ICommand
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
     {
         bool toggle = false;
+        string message_cassie =
+            "Bell_start Attention all personnel an electric failure has been detected . . " +
+            ". . . . . . pitch_.2 .g4 . .g4 pitch_0.7 Danger . all generators of the facility are " +
+            "shut pitch_0.5 jam_5_3 down pitch_.2 .g4 . .g4 pitch_0.9 All remaining personnel are " +
+            "advised to enter the entrance zone until an M T F squad come to escort jam_5_3 you " +
+            "pitch_.2 .g4 pitch_.5 .g4";
         Exiled.API.Features.Broadcast broadcast = new Exiled.API.Features.Broadcast("<color=green> You were " +
             "switched to 939 automatically", 10, true, Broadcast.BroadcastFlags.Normal);
         try
@@ -28,7 +34,7 @@ public class NightMode : ICommand
             {
                 toggle = true;
                 //cassie message
-                Cassie.Message("electric failure detected bell_start locate nearest checkpoint immediately BELL_end",
+                Cassie.Message(message_cassie,
                     true,true,true);
                 
                 //if a player is a scp we need to switch em to the dog
@@ -45,6 +51,7 @@ public class NightMode : ICommand
                         player.AddItem(ItemType.Flashlight);
                     }
                 }
+                
             }else 
             {
                 toggle = false;
@@ -72,12 +79,16 @@ public class NightMode : ICommand
 
             if (toggle)
             {
+                Nightmode.Instance.Config.nightmode_toggled = true;
                 response = "Turning the lights off... (gn back to the lobby -xela)";
+                Log.Debug(Nightmode.Instance.Config.nightmode_toggled);
                 return true;
             }
             else
             {
+                Nightmode.Instance.Config.nightmode_toggled = false;
                 response = "Turning the lights on... (here comes the sun)";
+                Log.Debug(Nightmode.Instance.Config.nightmode_toggled);
                 return true;
             }
         }

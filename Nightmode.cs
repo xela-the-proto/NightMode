@@ -73,6 +73,8 @@ namespace NightMode
             {
                 player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
             }
+
+            player.Spawned += Handlers.Player.OnPlayerSpawned;
         }
 
         private void UnregisterEvents()
@@ -85,6 +87,8 @@ namespace NightMode
             {
                 player.ChangingRadioPreset -= Handlers.Player.OnPlayerChangingRadioRange;
             }
+            
+            player.Spawned -= Handlers.Player.OnPlayerSpawned;
         }
             
     }

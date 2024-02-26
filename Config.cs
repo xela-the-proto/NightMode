@@ -20,5 +20,8 @@ namespace NightMode
         [Description("Make the battery of the radio not drain")]
         public bool RadioDrain { get; set; } = true;
 
+        [Description("DO NOT TOUCH USED FOR INTERNAL SHENANIGANS")]
+        public bool nightmode_toggled { get; set; }= false;
+
     }
 }
