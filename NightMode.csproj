@@ -90,7 +90,7 @@
     <ItemGroup>
         <Compile Include="API\PlayerData.cs" />
         <Compile Include="Commands\ColorRoom.cs" />
-        <Compile Include="Commands\Goodnight.cs" />
+        <Compile Include="Commands\NightMode.cs" />
         <Compile Include="Commands\RemoteBroadcast.cs" />
         <Compile Include="Config.cs" />
         <Compile Include="Handlers\Player.cs" />

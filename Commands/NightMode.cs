@@ -10,7 +10,7 @@ using PlayerRoles;
 
 namespace NightMode.Commands;
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
-public class Goodnight : ICommand
+public class NightMode : ICommand
 {
     public string Command { get; } = "nightmode";
     public string[] Aliases { get; } = new string[] { "gn" };
