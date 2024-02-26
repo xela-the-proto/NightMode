@@ -9,14 +9,16 @@ using player = Exiled.Events.Handlers.Player;
 
 namespace NightMode
 {
-    public class Nightmode : Plugin<Config> 
+    public class Nightmode : Plugin<Config>
     {
-        
         public static Nightmode Instance { get; } = new Nightmode();
-        private Nightmode() { }
+
+        private Nightmode()
+        {
+        }
 
         public override PluginPriority Priority { get; } = PluginPriority.Default;
-        
+
         public static readonly Dictionary<string, PlayerData> PlayerData = new Dictionary<string, PlayerData>();
 
         private int _patchesCounter;
@@ -25,7 +27,7 @@ namespace NightMode
         public override void OnEnabled()
         {
             base.OnEnabled();
-            
+
             RegisterEvents();
             Patch();
         }
@@ -55,20 +57,21 @@ namespace NightMode
                 Console.WriteLine(e);
             }
         }
-        
+
         private void Unpatch()
         {
             Harmony.UnpatchAll();
 
             Log.Debug("Patches have been undone!");
         }
-        
+
         private void RegisterEvents()
         {
             if (Instance.Config.RadioDrain)
             {
                 player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
             }
+
             if (Instance.Config.UL)
             {
                 player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
@@ -83,13 +86,13 @@ namespace NightMode
             {
                 player.UsingRadioBattery -= Handlers.Player.OnPlayerUsingRadioBattery;
             }
+
             if (Instance.Config.UL)
             {
                 player.ChangingRadioPreset -= Handlers.Player.OnPlayerChangingRadioRange;
             }
-            
+
             player.Spawned -= Handlers.Player.OnPlayerSpawned;
         }
-            
     }
 }

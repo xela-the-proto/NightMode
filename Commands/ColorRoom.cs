@@ -12,14 +12,14 @@ namespace NightMode.Commands
         public string Command { get; } = "colorallrooms";
         public string[] Aliases { get; } = new string[] { "car", "colallro" };
         public string Description { get; } = "color all rooms in the facility of a rgb color specified";
-        
+
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             try
             {
                 float value;
                 float[] userColor = [0, 0, 0];
-                
+
                 for (int i = 0; i < 4; i++)
                 {
                     if (i == 0)
@@ -35,7 +35,8 @@ namespace NightMode.Commands
                         else throw new ArgumentException();
                     }
                 }
-                Color color = new Color(userColor[0],userColor[1],userColor[2]);
+
+                Color color = new Color(userColor[0], userColor[1], userColor[2]);
                 foreach (var item in Room.List)
                 {
                     item.Color = color;
@@ -50,7 +51,5 @@ namespace NightMode.Commands
                 throw;
             }
         }
-
-        
     }
 }

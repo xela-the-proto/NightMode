@@ -9,13 +9,14 @@ using Exiled.Permissions.Commands.Permissions.Group;
 using PlayerRoles;
 
 namespace NightMode.Commands;
+
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
 public class NightMode : ICommand
 {
     public string Command { get; } = "nightmode";
     public string[] Aliases { get; } = new string[] { "gn" };
     public string Description { get; } = "Turn off all lights and give a flashligth to everyone";
-    
+
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
     {
         bool toggle = false;
@@ -35,8 +36,8 @@ public class NightMode : ICommand
                 toggle = true;
                 //cassie message
                 Cassie.Message(message_cassie,
-                    true,true,true);
-                
+                    true, true, true);
+
                 //if a player is a scp we need to switch em to the dog
                 //give every player a flashlight
                 foreach (var player in Player.List)
@@ -51,12 +52,12 @@ public class NightMode : ICommand
                         player.AddItem(ItemType.Flashlight);
                     }
                 }
-                
-            }else 
+            }
+            else
             {
                 toggle = false;
             }
-            
+
             //iterate through every room and turn off the lights
             foreach (var room in Room.List)
             {
@@ -67,13 +68,13 @@ public class NightMode : ICommand
                         room.TurnOffLights(-1F);
                     }
                 }
-                else if(toggle == false)
+                else if (toggle == false)
                 {
                     if (room.AreLightsOff)
                     {
                         Log.Debug("Trying NetworkLightsEnabled...");
                         room.RoomLightController.NetworkLightsEnabled = true;
-                    }   
+                    }
                 }
             }
 
@@ -99,6 +100,4 @@ public class NightMode : ICommand
             return false;
         }
     }
-
-    
 }

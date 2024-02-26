@@ -10,7 +10,6 @@ namespace NightMode.Handlers
 {
     public class Player
     {
-
         public static void OnPlayerUsingRadioBattery(UsingRadioBatteryEventArgs e)
         {
             e.Drain = 0;
@@ -30,7 +29,6 @@ namespace NightMode.Handlers
 
         public static void OnPlayerSpawned(SpawnedEventArgs e)
         {
-            
             if (Nightmode.Instance.Config.nightmode_toggled)
             {
                 if (!e.Player.IsScp)
@@ -41,7 +39,6 @@ namespace NightMode.Handlers
                     e.Player.Broadcast(new Exiled.API.Features.Broadcast("You have been given a flashlight!"));
                 }
             }
-                
         }
     }
 }

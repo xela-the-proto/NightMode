@@ -11,7 +11,7 @@ namespace NightMode.Handlers
 
         public void OnRoundStarted(string round_type)
         {
-            Map.Broadcast(10,$"Tipo round: {round_type}");
+            Map.Broadcast(10, $"Tipo round: {round_type}");
         }
     }
 }

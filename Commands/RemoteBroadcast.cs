@@ -2,13 +2,12 @@
 using CommandSystem;
 using PluginAPI.Core;
 using Mirror;
+
 namespace NightMode.Commands
 {
     [CommandHandler(typeof(GameConsoleCommandHandler))]
-    
     public class RemoteBroadcast : ICommand
     {
-        
         public string Command { get; } = "broadcast";
         public string[] Aliases { get; } = new string[] { "bc" };
         public string Description { get; } = "Broadcast to the server directly like if you were in remoteadmin";
@@ -35,6 +34,7 @@ namespace NightMode.Commands
 
                     i += 1;
                 }
+
                 response = $"Broadcasting {message} for {ushort_time} seconds to server...";
                 Server.Broadcast.RpcAddElement(message, ushort_time, Broadcast.BroadcastFlags.Normal);
                 Log.Debug("Broadcast should have been sent");
@@ -47,5 +47,5 @@ namespace NightMode.Commands
                 return false;
             }
         }
-    } 
+    }
 }

@@ -33,7 +33,7 @@ namespace NightMode.API
             string dataPath = Path.Combine(Path.Combine(PlayersPath, userId), "data.yml");
 
             if (!File.Exists(dataPath)) return;
-			
+
             string data = File.ReadAllText(dataPath);
 
             IDeserializer deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
