@@ -10,7 +10,7 @@ namespace NightMode.Commands
     public class ColorRoom : ICommand
     {
         public string Command { get; } = "colorallrooms";
-        public string[] Aliases { get; } = new string[] { "car", "colallro" };
+        public string[] Aliases { get; } = new string[] { "car", "colallroo" };
         public string Description { get; } = "color all rooms in the facility of a rgb color specified";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -22,11 +22,8 @@ namespace NightMode.Commands
 
                 for (int i = 0; i < 4; i++)
                 {
-                    if (i == 0)
-                    {
-                        //skip first arg
-                    }
-                    else
+                    //skip first arg
+                    if (i != 0)
                     {
                         if (float.TryParse(arguments.Array[i], out value))
                         {
@@ -42,7 +39,7 @@ namespace NightMode.Commands
                     item.Color = color;
                 }
 
-                response = "Color changed!";
+                response = "Color changed in all teh facility!";
                 return true;
             }
             catch (Exception e)

@@ -44,11 +44,13 @@ public class NightMode : ICommand
                 {
                     if (player.IsScp)
                     {
+                        Log.Debug($"switching {player.Nickname} to 939");
                         player.Role.Set(RoleTypeId.Scp939, SpawnReason.ForceClass);
                         player.Broadcast(broadcast);
                     }
                     else
                     {
+                        Log.Debug($"giving {player.Nickname} a flashlight");
                         player.AddItem(ItemType.Flashlight);
                     }
                 }
@@ -59,6 +61,7 @@ public class NightMode : ICommand
             }
 
             //iterate through every room and turn off the lights
+            Log.Debug("Trying NetworkLightsEnabled...");
             foreach (var room in Room.List)
             {
                 if (toggle)
@@ -72,7 +75,6 @@ public class NightMode : ICommand
                 {
                     if (room.AreLightsOff)
                     {
-                        Log.Debug("Trying NetworkLightsEnabled...");
                         room.RoomLightController.NetworkLightsEnabled = true;
                     }
                 }
@@ -80,6 +82,7 @@ public class NightMode : ICommand
 
             if (toggle)
             {
+                //toggle to let the server know if we need to give a torch
                 Nightmode.Instance.Config.nightmode_toggled = true;
                 response = "Turning the lights off... (gn back to the lobby -xela)";
                 Log.Debug(Nightmode.Instance.Config.nightmode_toggled);

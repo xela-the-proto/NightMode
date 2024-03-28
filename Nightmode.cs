@@ -69,15 +69,22 @@ namespace NightMode
         {
             if (Instance.Config.RadioDrain)
             {
+                Log.Debug("Registering battery usage...");
                 player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
             }
 
             if (Instance.Config.UL)
             {
+                Log.Debug("Registering radio preset...");
                 player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
             }
 
-            player.Spawned += Handlers.Player.OnPlayerSpawned;
+            if (Nightmode.Instance.Config.nightmode_toggled)
+            {
+                player.Spawned += Handlers.Player.OnPlayerSpawned;
+            }
+
+            player.UsedItem += Handlers.Player.OnPlayerUsingItem;
         }
 
         private void UnregisterEvents()
