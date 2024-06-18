@@ -1,7 +1,6 @@
 ﻿using System;
 using CommandSystem;
-using PluginAPI.Core;
-using Mirror;
+using Exiled.API.Features;
 
 namespace NightMode.Commands
 {
@@ -11,6 +10,7 @@ namespace NightMode.Commands
         public string Command { get; } = "broadcast";
         public string[] Aliases { get; } = new string[] { "bc" };
         public string Description { get; } = "Broadcast to the server directly like if you were in remoteadmin";
+        public bool SanitizeResponse { get; }
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {

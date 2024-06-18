@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using Exiled.API.Features;
 using CommandSystem;
 using MEC;
-using PluginAPI.Core;
 using UnityEngine;
 using Player = Exiled.API.Features.Player;
 using Random = System.Random;
@@ -16,8 +15,9 @@ public class MiniMadness : ICommand
     public string Command { get; } = "minimode";
     public string[] Aliases { get; } = ["minmode"];
     public string Description { get; } = "run a round of mini players";
+    public bool SanitizeResponse { get; }
     
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
+    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         if (arguments.Array[1] == "on")
         {
@@ -38,6 +38,7 @@ public class MiniMadness : ICommand
             }
             response = "Killed coroutine and reset everyone to scale 1";
             return true;
+            
         }
 
         
@@ -58,7 +59,6 @@ public class MiniMadness : ICommand
                 {
                     size = 1f;
                     player.Broadcast(new Exiled.API.Features.Broadcast("invalid", 1));
-
                 }
                 else
                 {

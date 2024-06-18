@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using CommandSystem;
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using Exiled.API.Features.Roles;
-using Exiled.Permissions.Commands.Permissions.Group;
 using PlayerRoles;
+using Exiled.API.Features;
 
 namespace NightMode.Commands;
 
@@ -16,8 +14,9 @@ public class NightMode : ICommand
     public string Command { get; } = "nightmode";
     public string[] Aliases { get; } = new string[] { "gn" };
     public string Description { get; } = "Turn off all lights and give a flashligth to everyone";
+    public bool SanitizeResponse { get; }
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
+    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         bool toggle = false;
         string message_cassie =

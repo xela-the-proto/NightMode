@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using HarmonyLib;
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using NightMode.API;
 using server = Exiled.Events.Handlers.Server;
 using player = Exiled.Events.Handlers.Player;
 
@@ -18,9 +17,7 @@ namespace NightMode
         }
 
         public override PluginPriority Priority { get; } = PluginPriority.Default;
-
-        public static readonly Dictionary<string, PlayerData> PlayerData = new Dictionary<string, PlayerData>();
-
+        
         private int _patchesCounter;
         private Harmony Harmony { get; set; }
 

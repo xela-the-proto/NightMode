@@ -12,6 +12,7 @@ namespace NightMode.Commands
         public string Command { get; } = "colorallrooms";
         public string[] Aliases { get; } = new string[] { "car", "colallroo" };
         public string Description { get; } = "color all rooms in the facility of a rgb color specified";
+        public bool SanitizeResponse { get; }
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
