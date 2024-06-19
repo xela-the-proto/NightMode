@@ -63,6 +63,8 @@ public class Player
             Log.Debug("item is " + item);
             e.Player.AddItem(item);
             e.Player.SessionVariables["flipped_success"] = true;
+            e.Player.Broadcast(new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and get " +
+                                                                 item, 5));
         }
     }
 }
