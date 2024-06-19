@@ -1,102 +1,95 @@
 ﻿using System;
-using System.Collections.Generic;
-using HarmonyLib;
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using server = Exiled.Events.Handlers.Server;
+using HarmonyLib;
 using player = Exiled.Events.Handlers.Player;
+using Player = NightMode.Handlers.Player;
 
-namespace NightMode
+namespace NightMode;
+
+public class Nightmode : Plugin<Config>
 {
-    public class Nightmode : Plugin<Config>
+    private int _patchesCounter;
+
+    private Nightmode()
     {
-        public static Nightmode Instance { get; } = new Nightmode();
+    }
 
-        private Nightmode()
+    public static Nightmode Instance { get; } = new();
+
+    public override PluginPriority Priority { get; } = PluginPriority.Default;
+    private Harmony Harmony { get; set; }
+
+    public override void OnEnabled()
+    {
+        base.OnEnabled();
+
+        RegisterEvents();
+        Patch();
+    }
+
+    public override void OnDisabled()
+    {
+        base.OnDisabled();
+        UnregisterEvents();
+        Unpatch();
+    }
+
+    private void Patch()
+    {
+        try
         {
+            Harmony = new Harmony($"NightMode.{++_patchesCounter}");
+            var lastDebugStatus = Harmony.DEBUG;
+            Harmony.DEBUG = true;
+
+            Harmony.PatchAll();
+
+            Harmony.DEBUG = lastDebugStatus;
+            Log.Debug("Patches applied successfully!");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    private void Unpatch()
+    {
+        Harmony.UnpatchAll();
+
+        Log.Debug("Patches have been undone!");
+    }
+
+    private void RegisterEvents()
+    {
+        if (Instance.Config.RadioDrain)
+        {
+            Log.Debug("Registering battery usage...");
+            player.UsingRadioBattery += Player.OnPlayerUsingRadioBattery;
         }
 
-        public override PluginPriority Priority { get; } = PluginPriority.Default;
-        
-        private int _patchesCounter;
-        private Harmony Harmony { get; set; }
-
-        public override void OnEnabled()
+        if (Instance.Config.UL)
         {
-            base.OnEnabled();
-
-            RegisterEvents();
-            Patch();
+            Log.Debug("Registering radio preset...");
+            player.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
         }
 
-        public override void OnDisabled()
-        {
-            base.OnDisabled();
-            UnregisterEvents();
-            Unpatch();
-        }
+        if (Instance.Config.nightmode_toggled) player.Spawned += Player.OnPlayerSpawned;
 
-        private void Patch()
-        {
-            try
-            {
-                Harmony = new Harmony($"NightMode.{++_patchesCounter}");
-                bool lastDebugStatus = Harmony.DEBUG;
-                Harmony.DEBUG = true;
+        player.UsedItem += Player.OnPlayerUsingItem;
 
-                Harmony.PatchAll();
+        if (Instance.Config.FlipRand) player.FlippingCoin += Player.FlippingCoin;
+    }
 
-                Harmony.DEBUG = lastDebugStatus;
-                Log.Debug("Patches applied successfully!");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
+    private void UnregisterEvents()
+    {
+        if (Instance.Config.RadioDrain) player.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
 
-        private void Unpatch()
-        {
-            Harmony.UnpatchAll();
+        if (Instance.Config.UL) player.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
 
-            Log.Debug("Patches have been undone!");
-        }
+        player.Spawned -= Player.OnPlayerSpawned;
 
-        private void RegisterEvents()
-        {
-            if (Instance.Config.RadioDrain)
-            {
-                Log.Debug("Registering battery usage...");
-                player.UsingRadioBattery += Handlers.Player.OnPlayerUsingRadioBattery;
-            }
-
-            if (Instance.Config.UL)
-            {
-                Log.Debug("Registering radio preset...");
-                player.ChangingRadioPreset += Handlers.Player.OnPlayerChangingRadioRange;
-            }
-
-            if (Nightmode.Instance.Config.nightmode_toggled)
-            {
-                player.Spawned += Handlers.Player.OnPlayerSpawned;
-            }
-
-            player.UsedItem += Handlers.Player.OnPlayerUsingItem;
-        }
-
-        private void UnregisterEvents()
-        {
-            if (Instance.Config.RadioDrain)
-            {
-                player.UsingRadioBattery -= Handlers.Player.OnPlayerUsingRadioBattery;
-            }
-
-            if (Instance.Config.UL)
-            {
-                player.ChangingRadioPreset -= Handlers.Player.OnPlayerChangingRadioRange;
-            }
-
-            player.Spawned -= Handlers.Player.OnPlayerSpawned;
-        }
+        if (Instance.Config.FlipRand) player.FlippingCoin -= Player.FlippingCoin;
     }
 }

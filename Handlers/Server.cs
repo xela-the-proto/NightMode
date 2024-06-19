@@ -1,7 +1,5 @@
-﻿namespace NightMode.Handlers
+﻿namespace NightMode.Handlers;
+
+public class Server
 {
-    public class Server
-    {
-       
-    }
 }
