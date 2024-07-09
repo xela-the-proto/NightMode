@@ -83,6 +83,12 @@
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>E:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule-Publicized.dll</HintPath>
         </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+          <HintPath>DLLS\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ProfilerModule">
+          <HintPath>DLLS\UnityEngine.ProfilerModule.dll</HintPath>
+        </Reference>
         <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
             <HintPath>packages\EXILED.8.9.6\lib\net48\YamlDotNet.dll</HintPath>
         </Reference>
@@ -97,6 +103,7 @@
         <Compile Include="Handlers\Player.cs"/>
         <Compile Include="Handlers\Server.cs"/>
         <Compile Include="Nightmode.cs"/>
+        <Compile Include="PlayerCommands\PingUser.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

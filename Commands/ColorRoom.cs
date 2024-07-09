@@ -32,7 +32,7 @@ public class ColorRoom : ICommand
             var color = new Color(userColor[0], userColor[1], userColor[2]);
             foreach (var item in Room.List) item.Color = color;
 
-            response = "Color changed in all teh facility!";
+            response = "Color changed in all the facility!";
             return true;
         }
         catch (Exception e)

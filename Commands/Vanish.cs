@@ -4,6 +4,7 @@ using CustomPlayerEffects;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using PlayerRoles;
+using PlayerRoles.PlayableScps.Scp173;
 using Player = Exiled.API.Features.Player;
 
 namespace NightMode.Commands;
@@ -20,6 +21,24 @@ public class Vanish : ICommand
     {
         try
         {
+            Player player = Player.Get(sender);
+            
+            if (!player.IsEffectActive<Invisible>())
+            {
+                player.EnableEffect<Invisible>(0f);
+                Log.Info("hiding " + player.Nickname + "with id" + player.Id);
+                response = "hiding...";
+                return true;
+            }
+
+            player.DisableEffect<Invisible>();
+            Log.Info("revealing " + player.Nickname + "with id" + player.Id);
+            response = "revealing...";
+            return false;
+            
+            
+            //TODO: delete when im sure the code above is good
+            /*
             var playerid = arguments.Array[1];
             Log.Debug(playerid);
             foreach (var player in Player.List)
@@ -46,11 +65,11 @@ public class Vanish : ICommand
 
             response = "couldnt find any player matching id";
             return false;
+            */
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            response = "bad command format\n vn [player_id]";
+            response = e.Message;
             return false;
         }
     }

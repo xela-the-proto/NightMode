@@ -63,6 +63,7 @@ public class Nightmode : Plugin<Config>
 
     private void RegisterEvents()
     {
+        //TODO: when i will have to do events rewrite these if's
         if (Instance.Config.RadioDrain)
         {
             Log.Debug("Registering battery usage...");
@@ -75,11 +76,15 @@ public class Nightmode : Plugin<Config>
             player.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
         }
 
-        if (Instance.Config.nightmode_toggled) player.Spawned += Player.OnPlayerSpawned;
+        if (Instance.Config.nightmode_toggled)
+        {
+            player.Spawned += Player.OnPlayerSpawned;
+        }
 
-        player.UsedItem += Player.OnPlayerUsingItem;
-
-        if (Instance.Config.FlipRand) player.FlippingCoin += Player.FlippingCoin;
+        if (Instance.Config.FlipRand)
+        {
+            player.FlippingCoin += Player.FlippingCoin;
+        }
     }
 
     private void UnregisterEvents()

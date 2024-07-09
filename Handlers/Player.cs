@@ -9,23 +9,6 @@ namespace NightMode.Handlers;
 
 public class Player
 {
-    public static void OnPlayerUsingItem(UsedItemEventArgs e)
-    {
-        var rand = new Random();
-        Log.Debug($"checking if item is throwable: {e.Item.IsThrowable}");
-        if (e.Item.IsThrowable)
-        {
-            Log.Debug("Detected throwable");
-            /*
-            var rand_int = rand.Next(0, 100);
-            if (rand_int >= 50)
-            {
-            */
-            e.Item.Destroy();
-            Log.Debug($"Destroyed {e.Item}");
-            //}
-        }
-    }
 
     public static void OnPlayerUsingRadioBattery(UsingRadioBatteryEventArgs e)
     {
@@ -40,6 +23,7 @@ public class Player
 
     public static void OnPlayerSpawned(SpawnedEventArgs e)
     {
+        
         if (!e.Player.IsScp && e.Player.IsAlive)
         {
             Log.Debug(Nightmode.Instance.Config.nightmode_toggled.ToString());
@@ -63,7 +47,7 @@ public class Player
             Log.Debug("item is " + item);
             e.Player.AddItem(item);
             e.Player.SessionVariables["flipped_success"] = true;
-            e.Player.Broadcast(new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and get " +
+            e.Player.Broadcast(new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and you get " +
                                                                  item, 5));
         }
     }
