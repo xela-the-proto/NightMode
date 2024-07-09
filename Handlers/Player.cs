@@ -23,6 +23,7 @@ public class Player
 
     public static void OnPlayerSpawned(SpawnedEventArgs e)
     {
+        
         if (!e.Player.IsScp && e.Player.IsAlive)
         {
             Log.Debug(Nightmode.Instance.Config.nightmode_toggled.ToString());

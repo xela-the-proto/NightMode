@@ -37,6 +37,7 @@ public class Vanish : ICommand
             return false;
             
             
+            //TODO: delete when im sure the code above is good
             /*
             var playerid = arguments.Array[1];
             Log.Debug(playerid);

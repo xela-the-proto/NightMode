@@ -10,7 +10,7 @@ public class NightMode : ICommand
 {
     public string Command { get; } = "nightmode";
     public string[] Aliases { get; } = { "gn" };
-    public string Description { get; } = "Turn off all lights and give a flashligth to everyone";
+    public string Description { get; } = "Turn off all lights and give a flashlight to everyone";
     public bool SanitizeResponse { get; }
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -70,13 +70,13 @@ public class NightMode : ICommand
             {
                 //toggle to let the server know if we need to give a torch
                 Nightmode.Instance.Config.nightmode_toggled = true;
-                response = "Turning the lights off... (gn back to the lobby -xela)";
+                response = "Turning the lights off...";
                 Log.Debug(Nightmode.Instance.Config.nightmode_toggled);
                 return true;
             }
 
             Nightmode.Instance.Config.nightmode_toggled = false;
-            response = "Turning the lights on... (here comes the sun)";
+            response = "Turning the lights on...";
             Log.Debug(Nightmode.Instance.Config.nightmode_toggled);
             return true;
         }
