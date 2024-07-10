@@ -103,6 +103,7 @@
         <Compile Include="Handlers\Player.cs"/>
         <Compile Include="Handlers\Server.cs"/>
         <Compile Include="Nightmode.cs"/>
+        <Compile Include="PlayerCommands\info.cs" />
         <Compile Include="PlayerCommands\PingUser.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
