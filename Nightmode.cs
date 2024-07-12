@@ -2,8 +2,10 @@
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using HarmonyLib;
-using player = Exiled.Events.Handlers.Player;
+using Player_exiled_handler = Exiled.Events.Handlers.Player;
 using Player = NightMode.Handlers.Player;
+using Nuke_exiled_handler = Exiled.Events.Handlers.Warhead;
+using Nuke = NightMode.Handlers.Nuke;
 
 namespace NightMode;
 
@@ -67,34 +69,39 @@ public class Nightmode : Plugin<Config>
         if (Instance.Config.RadioDrain)
         {
             Log.Debug("Registering battery usage...");
-            player.UsingRadioBattery += Player.OnPlayerUsingRadioBattery;
+            Player_exiled_handler.UsingRadioBattery += Player.OnPlayerUsingRadioBattery;
         }
 
         if (Instance.Config.UL)
         {
             Log.Debug("Registering radio preset...");
-            player.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
+            Player_exiled_handler.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
         }
 
         if (Instance.Config.nightmode_toggled)
         {
-            player.Spawned += Player.OnPlayerSpawned;
+            Player_exiled_handler.Spawned += Player.OnPlayerSpawned;
         }
 
         if (Instance.Config.FlipRand)
         {
-            player.FlippingCoin += Player.FlippingCoin;
+            Player_exiled_handler.FlippingCoin += Player.FlippingCoin;
         }
+
+        Nuke_exiled_handler.Starting += Nuke.onNukeStart;
+        Nuke_exiled_handler.Stopping += Nuke.onNukeStop;
     }
 
     private void UnregisterEvents()
     {
-        if (Instance.Config.RadioDrain) player.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
+        if (Instance.Config.RadioDrain) Player_exiled_handler.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
 
-        if (Instance.Config.UL) player.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
+        if (Instance.Config.UL) Player_exiled_handler.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
 
-        player.Spawned -= Player.OnPlayerSpawned;
+        Player_exiled_handler.Spawned -= Player.OnPlayerSpawned;
 
-        if (Instance.Config.FlipRand) player.FlippingCoin -= Player.FlippingCoin;
+        if (Instance.Config.FlipRand) Player_exiled_handler.FlippingCoin -= Player.FlippingCoin;
+        Nuke_exiled_handler.Starting -= Nuke.onNukeStart;
+        Nuke_exiled_handler.Stopping -= Nuke.onNukeStop;
     }
 }
