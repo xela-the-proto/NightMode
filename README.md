@@ -6,7 +6,7 @@ It's a plugin that's a collection of functionalities and random goofy stuff that
 
 ## Installation
 
-Simply drop the .dll from the releases in the plugin directory of your server
+Simply drop the .dll from the releases in the plugin directory of your server and follow any dependency listed below
 
     
 ## FAQ
@@ -14,6 +14,8 @@ Simply drop the .dll from the releases in the plugin directory of your server
 #### How many times will this updated
 i usually update whenever im bored and wanan do some coding experiments
 
+## Dependencies
+This plugin uses the dependencies of [Audioplayer](https://github.com/Edren-Baton-Team/AudioPlayer/tree/master)
 
 ## Authors
 
