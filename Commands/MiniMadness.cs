@@ -16,7 +16,14 @@ public class MiniMadness : ICommand
     public string[] Aliases { get; } = ["minmode"];
     public string Description { get; } = "run a round of mini players";
     public bool SanitizeResponse { get; }
-
+    
+    /// <summary>
+    /// Players get randomized heights (known glitch they fall out the map
+    /// </summary>
+    /// <param name="arguments"></param>
+    /// <param name="sender"></param>
+    /// <param name="response"></param>
+    /// <returns></returns>
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         if (arguments.Array[1] == "on")

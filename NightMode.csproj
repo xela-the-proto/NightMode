@@ -10,7 +10,7 @@
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>NightMode</RootNamespace>
         <AssemblyName>NightMode</AssemblyName>
-        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
@@ -43,6 +43,9 @@
         <Reference Include="Assembly-CSharp-firstpass">
             <HintPath>E:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
         </Reference>
+        <Reference Include="AudioPlayer">
+          <HintPath>DLLS\AudioPlayer.dll</HintPath>
+        </Reference>
         <Reference Include="CommandSystem.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
             <HintPath>packages\EXILED.8.9.6\lib\net48\CommandSystem.Core.dll</HintPath>
         </Reference>
@@ -73,8 +76,14 @@
         <Reference Include="NorthwoodLib, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
             <HintPath>packages\EXILED.8.9.6\lib\net48\NorthwoodLib.dll</HintPath>
         </Reference>
+        <Reference Include="NVorbis">
+          <HintPath>DLLS\NVorbis.dll</HintPath>
+        </Reference>
         <Reference Include="PluginAPI, Version=13.1.2.0, Culture=neutral, processorArchitecture=Amd64">
             <HintPath>packages\EXILED.8.9.6\lib\net48\PluginAPI.dll</HintPath>
+        </Reference>
+        <Reference Include="SCPSLAudioApi">
+          <HintPath>DLLS\SCPSLAudioApi.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
@@ -100,6 +109,7 @@
         <Compile Include="Commands\RemoteBroadcast.cs"/>
         <Compile Include="Commands\Vanish.cs"/>
         <Compile Include="Config.cs"/>
+        <Compile Include="Handlers\Nuke.cs" />
         <Compile Include="Handlers\Player.cs"/>
         <Compile Include="Handlers\Server.cs"/>
         <Compile Include="Nightmode.cs"/>
