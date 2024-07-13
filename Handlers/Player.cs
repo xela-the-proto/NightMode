@@ -9,18 +9,30 @@ namespace NightMode.Handlers;
 
 public class Player
 {
-
+    
+    /// <summary>
+    /// Disable radio drain
+    /// </summary>
+    /// <param name="e"></param>
     public static void OnPlayerUsingRadioBattery(UsingRadioBatteryEventArgs e)
     {
         e.Drain = 0;
         if (e.IsAllowed) e.IsAllowed = false;
     }
-
+    
+    /// <summary>
+    /// Locks radio to a specific channel
+    /// </summary>
+    /// <param name="e"></param>
     public static void OnPlayerChangingRadioRange(ChangingRadioPresetEventArgs e)
     {
         if (e.NewValue != RadioRange.Ultra) e.NewValue = RadioRange.Ultra;
     }
-
+    
+    /// <summary>
+    /// What to do when the player spawns based on if an event is active
+    /// </summary>
+    /// <param name="e"></param>
     public static void OnPlayerSpawned(SpawnedEventArgs e)
     {
         
@@ -33,7 +45,11 @@ public class Player
             e.Player.Broadcast(new Exiled.API.Features.Broadcast("You have been given a flashlight!"));
         }
     }
-
+    
+    /// <summary>
+    /// if enabled from config give player a random item ONCE per round
+    /// </summary>
+    /// <param name="e"></param>
     public static void FlippingCoin(FlippingCoinEventArgs e)
     {
         var flipped = false;

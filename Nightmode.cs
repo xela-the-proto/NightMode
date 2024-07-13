@@ -4,6 +4,8 @@ using Exiled.API.Features;
 using HarmonyLib;
 using Player_exiled_handler = Exiled.Events.Handlers.Player;
 using Player = NightMode.Handlers.Player;
+using Server_exiled_handler = Exiled.Events.Handlers.Server;
+using Server = NightMode.Handlers.Server;
 using Nuke_exiled_handler = Exiled.Events.Handlers.Warhead;
 using Nuke = NightMode.Handlers.Nuke;
 
@@ -13,7 +15,7 @@ public class Nightmode : Plugin<Config>
 {
     private int _patchesCounter;
 
-    private Nightmode()
+    public Nightmode()
     {
     }
 
@@ -65,7 +67,7 @@ public class Nightmode : Plugin<Config>
 
     private void RegisterEvents()
     {
-        //TODO: when i will have to do events rewrite these if's
+        
         if (Instance.Config.RadioDrain)
         {
             Log.Debug("Registering battery usage...");
@@ -90,18 +92,31 @@ public class Nightmode : Plugin<Config>
 
         Nuke_exiled_handler.Starting += Nuke.onNukeStart;
         Nuke_exiled_handler.Stopping += Nuke.onNukeStop;
+        Server_exiled_handler.WaitingForPlayers += Server.onServerStarting;
+        Server_exiled_handler.RoundStarted += Server.onRoundStart;
     }
 
     private void UnregisterEvents()
     {
-        if (Instance.Config.RadioDrain) Player_exiled_handler.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
+        if (Instance.Config.RadioDrain)
+        {
+            Player_exiled_handler.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
+        }
 
-        if (Instance.Config.UL) Player_exiled_handler.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
+        if (Instance.Config.UL)
+        {
+            Player_exiled_handler.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
+        }
 
+        if (Instance.Config.FlipRand)
+        {
+            Player_exiled_handler.FlippingCoin -= Player.FlippingCoin;
+        }
+        
         Player_exiled_handler.Spawned -= Player.OnPlayerSpawned;
-
-        if (Instance.Config.FlipRand) Player_exiled_handler.FlippingCoin -= Player.FlippingCoin;
         Nuke_exiled_handler.Starting -= Nuke.onNukeStart;
         Nuke_exiled_handler.Stopping -= Nuke.onNukeStop;
+        Server_exiled_handler.WaitingForPlayers -= Server.onServerStarting;
+        Server_exiled_handler.RoundStarted -= Server.onRoundStart;
     }
 }

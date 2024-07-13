@@ -12,7 +12,7 @@ public class ColorRoom : ICommand
     public string[] Aliases { get; } = { "car", "colallroo" };
     public string Description { get; } = "color all rooms in the facility of a rgb color specified";
     public bool SanitizeResponse { get; }
-
+    
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         try
