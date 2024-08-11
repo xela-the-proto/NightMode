@@ -52,7 +52,6 @@ public class Player
     /// <param name="e"></param>
     public static void FlippingCoin(FlippingCoinEventArgs e)
     {
-        var flipped = false;
         var rand = new Random();
         var val = Enum.GetValues(typeof(ItemType));
         if (!e.Player.SessionVariables.TryGetValue("flipped_success", out var flip_obj))
