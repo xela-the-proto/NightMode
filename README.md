@@ -1,28 +1,23 @@
 
 # Nightmode
 
-## What is this?
-It's a plugin that's a collection of functionalities and random goofy stuff that i made for my friend group to play some SCP:sl
+Nightmode is a collection of random ideas i got while playing with my friends on a private server
+**Functionalities so far**
+- Events (Facility blackout) that will be automated down the line
+- Broadcast from the game console 
+- Vanish (WIP its very rudimental as it is right now)
+- Lots of tiny QoL to come (infinite radio is one)
+- "Minigames" (flip a coin to get a random item)
+- Change the color of all rooms in the facility with one command
+- Some client side commands
 
-## Installation
+**For now this plugin is very rudimentary and it'll probably constantly be updated as issues and ideas pop up**
 
-Simply drop the .dll from the releases in the plugin directory of your server and follow any dependency listed below
+**EXILED version**
+- **8.11.0 ** (Most of the time the mod will be on the latest version of exiled)
 
-    
-## FAQ
+**Additional info**
+**THIS MOD HAS DEPENDENCIES!** 
+- Depends on the AudioSystem plugin and its dependencies
 
-#### How many times will this updated
-i usually update whenever im bored and wanan do some coding experiments
-
-## Dependencies
-This plugin uses the dependencies of [Audioplayer](https://github.com/Edren-Baton-Team/AudioPlayer/tree/master)
-
-## Authors
-
-- [@xela](https://github.com/xela-the-proto)
-
-
-## Acknowledgements
-
- - [The exiled project](https://github.com/Exiled-Team/EXILED)
-
+Its my first time making any of my coding projects public (apart for some archived ones that went nowhere) any feedback and criticism is greatly appreciated!
