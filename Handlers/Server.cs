@@ -1,5 +1,6 @@
 ﻿using AudioPlayer.API;
 using AudioPlayer.Commands;
+using Hints;
 using PluginAPI.Events;
 
 namespace NightMode.Handlers;
@@ -26,7 +27,7 @@ public class Server
         AudioController.SpawnDummy(99);
         if (Nightmode.Instance.Config.playOnLobby)
         {
-            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong,true,80f);
+            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong,true,70f);
         }
     }
     
@@ -38,6 +39,11 @@ public class Server
         if (Nightmode.Instance.Config.playOnLobby)
         {
             AudioController.StopAudio();
+        }
+
+        foreach (var player in PluginAPI.Core.Player.GetPlayers())
+        {
+            player.ReceiveHint("Test Hint");
         }
     }
 }

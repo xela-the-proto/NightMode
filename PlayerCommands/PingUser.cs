@@ -15,11 +15,11 @@ public class PingUser : ICommand
     public string Description { get; } = "pong! returns your ping from the server";
     public bool SanitizeResponse { get; } = true;
 
-    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
+    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         Player player = Player.Get(sender);
         int ping = player.Ping;
         response = "Pong! your ping is " + ping;
         return true;
     }
-}
+}   

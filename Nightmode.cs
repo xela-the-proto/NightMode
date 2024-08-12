@@ -15,10 +15,6 @@ public class Nightmode : Plugin<Config>
 {
     private int _patchesCounter;
 
-    public Nightmode()
-    {
-    }
-
     public static Nightmode Instance { get; } = new();
 
     public override PluginPriority Priority { get; } = PluginPriority.Default;

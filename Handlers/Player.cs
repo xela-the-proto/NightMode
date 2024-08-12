@@ -36,14 +36,15 @@ public class Player
     public static void OnPlayerSpawned(SpawnedEventArgs e)
     {
         
-        if (!e.Player.IsScp && e.Player.IsAlive)
+        if (!e.Player.IsScp && e.Player.IsAlive && Nightmode.Instance.Config.nightmode_toggled)
         {
             Log.Debug(Nightmode.Instance.Config.nightmode_toggled.ToString());
             Log.Debug(
-                "Player has not any form of illumination (minions heh)(btw idk why i wrote minions cringe ash shit but ill keep it)! giving one...");
+                "Player hasn't got any flashlight giving one...");
             e.Player.AddItem(ItemType.Flashlight);
             e.Player.Broadcast(new Exiled.API.Features.Broadcast("You have been given a flashlight!"));
         }
+        
     }
     
     /// <summary>
@@ -52,7 +53,6 @@ public class Player
     /// <param name="e"></param>
     public static void FlippingCoin(FlippingCoinEventArgs e)
     {
-        var flipped = false;
         var rand = new Random();
         var val = Enum.GetValues(typeof(ItemType));
         if (!e.Player.SessionVariables.TryGetValue("flipped_success", out var flip_obj))

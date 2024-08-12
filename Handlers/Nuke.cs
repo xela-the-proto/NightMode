@@ -19,7 +19,7 @@ public class Nuke
     {
         if (Nightmode.Instance.Config.playOnNukeStart)
         {
-            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.nukeSong);
+            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.nukeSong,true,70f);
         }
         
     }
