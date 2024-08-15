@@ -1,7 +1,13 @@
-﻿using AudioPlayer.API;
+﻿using System;
+using AudioPlayer.API;
 using AudioPlayer.Commands;
+using Exiled.API.Features;
 using Hints;
+using MapGeneration;
+using NightMode.Commands;
+using PluginAPI.Commands;
 using PluginAPI.Events;
+using RemoteAdmin;
 
 namespace NightMode.Handlers;
 
@@ -24,10 +30,21 @@ public class Server
     /// </summary>
     public static void onServerStarting()
     {
+        Random random = new Random();
         AudioController.SpawnDummy(99);
         if (Nightmode.Instance.Config.playOnLobby)
         {
-            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong,true,70f);
+            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong, true, 70f);
+        }
+
+        if (Nightmode.Instance.Config.eventRand)
+        {
+            var events = Nightmode.Instance.Config.events.Length;
+            int rand = random.Next(1, events);
+
+            string command = Nightmode.Instance.Config.events[rand - 1];
+
+            Exiled.API.Features.Server.ExecuteCommand(command + " on");
         }
     }
     

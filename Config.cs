@@ -7,6 +7,9 @@ public sealed class Config : IConfig
 {
     [Description("Determines if the plugin should be enabled or disabled.")]
     public bool IsEnabled { get; set; } = true;
+    
+    [Description("Sets if at the start of the round the server can roll a random event")]
+    public bool eventRand { get; set; } = true;
 
     [Description("Debug mode?")] public bool Debug { get; set; } = false;
     [Description("Lock the radio on UL")] public bool UL { get; set; } = false;
@@ -31,5 +34,8 @@ public sealed class Config : IConfig
     [Description("Used for internal checks no touch thx")]
     public bool nightmode_toggled { get; set; } = false;
 
-    
+    [Description("List of possible events")]
+
+    public string[] events { get; set; } = new[] { "nightmode" };
+
 }
