@@ -30,22 +30,13 @@ public class Server
     /// </summary>
     public static void onServerStarting()
     {
-        Random random = new Random();
         AudioController.SpawnDummy(99);
         if (Nightmode.Instance.Config.playOnLobby)
         {
             AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong, true, 70f);
         }
 
-        if (Nightmode.Instance.Config.eventRand)
-        {
-            var events = Nightmode.Instance.Config.events.Length;
-            int rand = random.Next(1, events);
-
-            string command = Nightmode.Instance.Config.events[rand - 1];
-
-            Exiled.API.Features.Server.ExecuteCommand(command + " on");
-        }
+        
     }
     
     /// <summary>
@@ -53,14 +44,23 @@ public class Server
     /// </summary>
     public static void onRoundStart()
     {
+        Random random = new Random();
+        
         if (Nightmode.Instance.Config.playOnLobby)
         {
             AudioController.StopAudio();
         }
-
-        foreach (var player in PluginAPI.Core.Player.GetPlayers())
+        
+        if (Nightmode.Instance.Config.eventRand)
         {
-            player.ReceiveHint("Test Hint");
+            var events = Nightmode.Instance.Config.events.Length;
+            int rand = random.Next(1, events);
+
+            string command = Nightmode.Instance.Config.events[rand - 1];
+            Log.Debug("command from list: " + command);
+            Log.Debug("Index: " + rand);
+            Exiled.API.Features.Server.ExecuteCommand(command + " on");
         }
+        
     }
 }

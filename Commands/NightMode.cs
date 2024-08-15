@@ -6,6 +6,7 @@ using PlayerRoles;
 namespace NightMode.Commands;
 
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
+[CommandHandler(typeof(GameConsoleCommandHandler))]
 public class NightMode : ICommand
 {
     public string Command { get; } = "nightmode";
