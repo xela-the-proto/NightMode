@@ -10,15 +10,16 @@ using Random = System.Random;
 namespace NightMode.Commands;
 
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
+[CommandHandler(typeof(GameConsoleCommandHandler))]
 public class MiniMadness : ICommand
 {
+    public bool SanitizeResponse { get; }
     public string Command { get; } = "minimode";
     public string[] Aliases { get; } = ["minmode"];
     public string Description { get; } = "run a round of mini players";
-    public bool SanitizeResponse { get; }
-    
+
     /// <summary>
-    /// Players get randomized heights (known glitch they fall out the map
+    ///     Players get randomized heights (known glitch they fall out the map)
     /// </summary>
     /// <param name="arguments"></param>
     /// <param name="sender"></param>
@@ -34,7 +35,7 @@ public class MiniMadness : ICommand
         }
 
         Log.Debug("Killing coroutine...");
-        var value = Timing.KillCoroutines("rand_coroutine");
+        int value = Timing.KillCoroutines("rand_coroutine");
         Log.Debug($"killed {value} coroutine");
         foreach (var player in Player.List)
         {
@@ -48,13 +49,13 @@ public class MiniMadness : ICommand
 
     public IEnumerator<float> Rand_sizes()
     {
-        var random_int = new Random();
+        Random random_int = new Random();
         for (;;)
         {
             Log.Debug("start for iteration");
             foreach (var player in Player.List)
             {
-                var size = (float)random_int.Next(0, 3);
+                float size = (float)random_int.Next(0, 3);
                 size = (float)(size * random_int.NextDouble());
                 Log.Debug($"rand = {size}");
                 if (size < 0.1f || size > 2.5f)
@@ -65,7 +66,8 @@ public class MiniMadness : ICommand
                 else
                 {
                     player.Broadcast(new Exiled.API.Features.Broadcast($"{size}", 1));
-                    player.Scale = new Vector3(size, size, size);
+                    float rounded_size = (float)Math.Round(size, MidpointRounding.AwayFromZero);
+                    player.Scale = new Vector3(rounded_size, rounded_size, rounded_size);
                 }
             }
 

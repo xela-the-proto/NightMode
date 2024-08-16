@@ -9,21 +9,21 @@ namespace NightMode.Commands;
 [CommandHandler(typeof(GameConsoleCommandHandler))]
 public class NightMode : ICommand
 {
+    public bool SanitizeResponse { get; }
     public string Command { get; } = "nightmode";
     public string[] Aliases { get; } = { "gn" };
     public string Description { get; } = "Turn off all lights and give a flashlight to everyone";
-    public bool SanitizeResponse { get; }
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
-        var toggle = false;
-        var message_cassie =
+        bool toggle = false;
+        string message_cassie =
             "Bell_start Attention all personnel an electric failure has been detected . . " +
             ". . . . . . pitch_.2 .g4 . .g4 pitch_0.7 Danger . all generators of the facility are " +
             "shut pitch_0.5 jam_5_3 down pitch_.2 .g4 . .g4 pitch_0.9 All remaining personnel are " +
             "advised to enter the entrance zone until an M T F squad come to escort jam_5_3 you " +
             "pitch_.2 .g4 pitch_.5 .g4";
-        var broadcast = new Exiled.API.Features.Broadcast("<color=green> You were " +
+        Exiled.API.Features.Broadcast broadcast = new Exiled.API.Features.Broadcast("<color=green> You were " +
                                                           "switched to 939 automatically");
         try
         {

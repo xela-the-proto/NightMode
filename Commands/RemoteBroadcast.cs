@@ -7,19 +7,19 @@ namespace NightMode.Commands;
 [CommandHandler(typeof(GameConsoleCommandHandler))]
 public class RemoteBroadcast : ICommand
 {
+    public bool SanitizeResponse { get; }
     public string Command { get; } = "broadcast";
     public string[] Aliases { get; } = { "bc" };
     public string Description { get; } = "Broadcast to the server directly like if you were in remoteadmin";
-    public bool SanitizeResponse { get; }
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         try
         {
             ushort time = 0;
-            var message = "<color=red>[SERVER] <color=white>";
+            string message = "<color=red>[SERVER] <color=white>";
             ushort ushort_time = 0;
-            var i = 0;
+            int i = 0;
             foreach (var item in arguments)
             {
                 if (i == 0)
