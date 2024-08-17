@@ -7,7 +7,6 @@ namespace NightMode.Handlers;
 
 public class Server
 {
-    public static Nightmode Instance { get; } = new();
 
     /// <summary>
     ///     disconnect the dummy

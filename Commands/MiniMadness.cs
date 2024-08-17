@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommandSystem;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using MEC;
 using UnityEngine;
@@ -46,7 +47,7 @@ public class MiniMadness : ICommand
         response = "Killed coroutine and reset everyone to scale 1";
         return true;
     }
-
+    
     public IEnumerator<float> Rand_sizes()
     {
         Random random_int = new Random();
@@ -69,6 +70,7 @@ public class MiniMadness : ICommand
                     float rounded_size = (float)Math.Round(size, MidpointRounding.AwayFromZero);
                     player.Scale = new Vector3(rounded_size, rounded_size, rounded_size);
                 }
+                
             }
 
             yield return Timing.WaitForSeconds(Nightmode.Instance.Config.Time_switching);

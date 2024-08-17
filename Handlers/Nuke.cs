@@ -6,7 +6,7 @@ namespace NightMode.Handlers;
 
 public class Nuke
 {
-    public static Nightmode Instance { get; } = new();
+    public static Nightmode Instance { get; }
 
     /// <summary>
     ///     Plays audio when the nuke starts

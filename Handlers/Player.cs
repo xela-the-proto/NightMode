@@ -42,6 +42,8 @@ public class Player
             e.Player.AddItem(ItemType.Flashlight);
             e.Player.Broadcast(new Exiled.API.Features.Broadcast("You have been given a flashlight!"));
         }
+        //save a players room in case they get stuck / clip out
+        Exiled.API.Features.Server.ExecuteCommand("stuckService");
     }
 
     /// <summary>
@@ -65,4 +67,6 @@ public class Player
                                                                  item, 5));
         }
     }
+
+    
 }

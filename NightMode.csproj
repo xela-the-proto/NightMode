@@ -107,12 +107,14 @@
         <Compile Include="Commands\MiniMadness.cs"/>
         <Compile Include="Commands\NightMode.cs"/>
         <Compile Include="Commands\RemoteBroadcast.cs"/>
+        <Compile Include="Commands\Stuck.cs" />
         <Compile Include="Commands\Vanish.cs"/>
         <Compile Include="Config.cs"/>
         <Compile Include="FakeSync\FakeNightVis.cs"/>
         <Compile Include="Handlers\Nuke.cs"/>
         <Compile Include="Handlers\Player.cs"/>
         <Compile Include="Handlers\Server.cs"/>
+        <Compile Include="InternalCommands\StuckRoutine.cs" />
         <Compile Include="Nightmode.cs"/>
         <Compile Include="PlayerCommands\Info.cs"/>
         <Compile Include="PlayerCommands\PingUser.cs"/>

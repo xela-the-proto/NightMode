@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using HarmonyLib;
+using MEC;
 using Player_exiled_handler = Exiled.Events.Handlers.Player;
 using Player = NightMode.Handlers.Player;
 using Server_exiled_handler = Exiled.Events.Handlers.Server;
@@ -15,7 +17,7 @@ public class Nightmode : Plugin<Config>
 {
     private int _patchesCounter;
 
-    public static Nightmode Instance { get; } = new();
+    public static Nightmode Instance { get; }
 
     public override PluginPriority Priority { get; } = PluginPriority.Default;
     private Harmony Harmony { get; set; }
@@ -23,7 +25,6 @@ public class Nightmode : Plugin<Config>
     public override void OnEnabled()
     {
         base.OnEnabled();
-
         RegisterEvents();
         Patch();
     }
@@ -99,4 +100,6 @@ public class Nightmode : Plugin<Config>
         Server_exiled_handler.WaitingForPlayers -= Server.onServerStarting;
         Server_exiled_handler.RoundStarted -= Server.onRoundStart;
     }
+    
+    
 }
