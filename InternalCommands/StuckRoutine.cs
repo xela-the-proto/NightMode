@@ -25,12 +25,16 @@ public class StuckRoutine : ICommand
     
     public IEnumerator<float> GetLastRoom()
     {
-        foreach (var p in Exiled.API.Features.Player.List)
+        for (;;)
         {
-            p.SessionVariables.Add("LastRoom", p.CurrentRoom);
+            foreach (var p in Exiled.API.Features.Player.List)
+            {
+                p.SessionVariables.Add("LastRoom", p.CurrentRoom.Position);
+                Log.Info(p.CurrentRoom.Name);
+            }
+            Log.Info("Storing latest room player was in...");
+            yield return Timing.WaitForSeconds(5);
         }
-        Log.Info("Storing latest room player was in...");
-        yield return Timing.WaitForSeconds(5);
     }
 }
 

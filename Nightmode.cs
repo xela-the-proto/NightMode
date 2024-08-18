@@ -17,7 +17,7 @@ public class Nightmode : Plugin<Config>
 {
     private int _patchesCounter;
 
-    public static Nightmode Instance { get; }
+    public static Nightmode Instance { get; } = new();
 
     public override PluginPriority Priority { get; } = PluginPriority.Default;
     private Harmony Harmony { get; set; }
@@ -84,6 +84,7 @@ public class Nightmode : Plugin<Config>
         Nuke_exiled_handler.Stopping += Nuke.onNukeStop;
         Server_exiled_handler.WaitingForPlayers += Server.onServerStarting;
         Server_exiled_handler.RoundStarted += Server.onRoundStart;
+        Server_exiled_handler.RestartingRound += Server.onRoundRestarting;
     }
 
     private void UnregisterEvents()

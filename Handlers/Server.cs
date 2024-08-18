@@ -23,9 +23,14 @@ public class Server
     /// </summary>
     public static void onServerStarting()
     {
+        //hmm yes the biggest and ugliest hack bc it wont fucking load the config when starting/restarting
+        Exiled.API.Features.Server.ExecuteCommand("reload configs");
+        
         AudioController.SpawnDummy(99);
         if (Nightmode.Instance.Config.playOnLobby)
+        {
             AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong, true, 70f);
+        }
     }
 
     /// <summary>
@@ -35,7 +40,12 @@ public class Server
     {
         Random random = new Random();
 
-        if (Nightmode.Instance.Config.playOnLobby) AudioController.StopAudio();
+        Exiled.API.Features.Server.ExecuteCommand("stuckService");
+
+        if (Nightmode.Instance.Config.playOnLobby)
+        {
+            AudioController.StopAudio();
+        }
 
         if (Nightmode.Instance.Config.eventRand)
         {
@@ -48,5 +58,10 @@ public class Server
             Log.Debug("Index: " + rand);
             Exiled.API.Features.Server.ExecuteCommand(command + " on");
         }
+    }
+    public static void onRoundRestarting()
+    {
+        //hmm yes the biggest and ugliest hack bc it wont fucking load the config when starting/restarting
+        Exiled.API.Features.Server.ExecuteCommand("reload configs");
     }
 }
