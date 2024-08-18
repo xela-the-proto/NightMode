@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using CommandSystem;
-using GameCore;
 using MEC;
 using Log = PluginAPI.Core.Log;
 
 namespace NightMode.InternalCommands;
 
 [CommandHandler(typeof(GameConsoleCommandHandler))]
-[CommandHandler(typeof(RemoteAdminCommandHandler))]
 public class StuckRoutine : ICommand
 {
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
@@ -25,10 +23,12 @@ public class StuckRoutine : ICommand
     
     public IEnumerator<float> GetLastRoom()
     {
+        Log.Info("entering routine");
         for (;;)
         {
             foreach (var p in Exiled.API.Features.Player.List)
             {
+                Log.Info("running");
                 p.SessionVariables.Add("LastRoom", p.CurrentRoom.Position);
                 Log.Info(p.CurrentRoom.Name);
             }

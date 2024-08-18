@@ -56,7 +56,7 @@ public class MiniMadness : ICommand
             Log.Debug("start for iteration");
             foreach (var player in Player.List)
             {
-                float size = (float)random_int.Next(0, 3);
+                float size = random_int.Next(0, 3);
                 size = (float)(size * random_int.NextDouble());
                 Log.Debug($"rand = {size}");
                 if (size < 0.1f || size > 2.5f)
@@ -66,13 +66,10 @@ public class MiniMadness : ICommand
                 }
                 else
                 {
-                    player.Broadcast(new Exiled.API.Features.Broadcast($"{size}", 1));
-                    float rounded_size = (float)Math.Round(size, MidpointRounding.AwayFromZero);
-                    player.Scale = new Vector3(rounded_size, rounded_size, rounded_size);
-                }
-                
+                    player.Broadcast(new Exiled.API.Features.Broadcast($"{size}", 1)); 
+                    player.Scale = new Vector3(size, size, size);
+                }   
             }
-
             yield return Timing.WaitForSeconds(Nightmode.Instance.Config.Time_switching);
         }
     }

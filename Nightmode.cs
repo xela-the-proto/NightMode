@@ -66,13 +66,11 @@ public class Nightmode : Plugin<Config>
     {
         if (Instance.Config.RadioDrain)
         {
-            Log.Debug("Registering battery usage...");
             Player_exiled_handler.UsingRadioBattery += Player.OnPlayerUsingRadioBattery;
         }
 
         if (Instance.Config.UL)
         {
-            Log.Debug("Registering radio preset...");
             Player_exiled_handler.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
         }
 
