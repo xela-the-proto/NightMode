@@ -28,6 +28,9 @@ public class MiniMadness : ICommand
     /// <returns></returns>
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
+        //this shit so broken and so unfun imm ajust remove it lol
+        response = "THIS EVENT IS DEPRECATED";
+        return false;
         if (arguments.Array[1] == "on")
         {
             Timing.RunCoroutine(Rand_sizes(), "rand_coroutine");

@@ -39,8 +39,9 @@ public class Server
     public static void onRoundStart()
     {
         Random random = new Random();
-
-        Exiled.API.Features.Server.ExecuteCommand("stuckService");
+        
+        //deprecated since the event itself was dodo
+        //Exiled.API.Features.Server.ExecuteCommand("stuckService");
 
         if (Nightmode.Instance.Config.playOnLobby)
         {
