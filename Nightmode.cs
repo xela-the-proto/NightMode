@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using HarmonyLib;
+using MEC;
 using Player_exiled_handler = Exiled.Events.Handlers.Player;
 using Player = NightMode.Handlers.Player;
 using Server_exiled_handler = Exiled.Events.Handlers.Server;
@@ -23,7 +25,6 @@ public class Nightmode : Plugin<Config>
     public override void OnEnabled()
     {
         base.OnEnabled();
-
         RegisterEvents();
         Patch();
     }
@@ -40,7 +41,7 @@ public class Nightmode : Plugin<Config>
         try
         {
             Harmony = new Harmony($"NightMode.{++_patchesCounter}");
-            var lastDebugStatus = Harmony.DEBUG;
+            bool lastDebugStatus = Harmony.DEBUG;
             Harmony.DEBUG = true;
 
             Harmony.PatchAll();
@@ -63,56 +64,41 @@ public class Nightmode : Plugin<Config>
 
     private void RegisterEvents()
     {
-        
         if (Instance.Config.RadioDrain)
         {
-            Log.Debug("Registering battery usage...");
             Player_exiled_handler.UsingRadioBattery += Player.OnPlayerUsingRadioBattery;
         }
 
         if (Instance.Config.UL)
         {
-            Log.Debug("Registering radio preset...");
             Player_exiled_handler.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
         }
 
-        if (Instance.Config.nightmode_toggled)
-        {
-            Player_exiled_handler.Spawned += Player.OnPlayerSpawned;
-        }
+        if (Instance.Config.nightmode_toggled) Player_exiled_handler.Spawned += Player.OnPlayerSpawned;
 
-        if (Instance.Config.FlipRand)
-        {
-            Player_exiled_handler.FlippingCoin += Player.FlippingCoin;
-        }
+        if (Instance.Config.FlipRand) Player_exiled_handler.FlippingCoin += Player.FlippingCoin;
 
         Nuke_exiled_handler.Starting += Nuke.onNukeStart;
         Nuke_exiled_handler.Stopping += Nuke.onNukeStop;
         Server_exiled_handler.WaitingForPlayers += Server.onServerStarting;
         Server_exiled_handler.RoundStarted += Server.onRoundStart;
+        Server_exiled_handler.RestartingRound += Server.onRoundRestarting;
     }
 
     private void UnregisterEvents()
     {
-        if (Instance.Config.RadioDrain)
-        {
-            Player_exiled_handler.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
-        }
+        if (Instance.Config.RadioDrain) Player_exiled_handler.UsingRadioBattery -= Player.OnPlayerUsingRadioBattery;
 
-        if (Instance.Config.UL)
-        {
-            Player_exiled_handler.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
-        }
+        if (Instance.Config.UL) Player_exiled_handler.ChangingRadioPreset -= Player.OnPlayerChangingRadioRange;
 
-        if (Instance.Config.FlipRand)
-        {
-            Player_exiled_handler.FlippingCoin -= Player.FlippingCoin;
-        }
-        
+        if (Instance.Config.FlipRand) Player_exiled_handler.FlippingCoin -= Player.FlippingCoin;
+
         Player_exiled_handler.Spawned -= Player.OnPlayerSpawned;
         Nuke_exiled_handler.Starting -= Nuke.onNukeStart;
         Nuke_exiled_handler.Stopping -= Nuke.onNukeStop;
         Server_exiled_handler.WaitingForPlayers -= Server.onServerStarting;
         Server_exiled_handler.RoundStarted -= Server.onRoundStart;
     }
+    
+    
 }

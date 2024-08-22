@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommandSystem;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using MEC;
 using UnityEngine;
@@ -10,15 +11,16 @@ using Random = System.Random;
 namespace NightMode.Commands;
 
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
+[CommandHandler(typeof(GameConsoleCommandHandler))]
 public class MiniMadness : ICommand
 {
+    public bool SanitizeResponse { get; }
     public string Command { get; } = "minimode";
     public string[] Aliases { get; } = ["minmode"];
     public string Description { get; } = "run a round of mini players";
-    public bool SanitizeResponse { get; }
-    
+
     /// <summary>
-    /// Players get randomized heights (known glitch they fall out the map
+    ///     Players get randomized heights (known glitch they fall out the map)
     /// </summary>
     /// <param name="arguments"></param>
     /// <param name="sender"></param>
@@ -26,6 +28,9 @@ public class MiniMadness : ICommand
     /// <returns></returns>
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
+        //this shit so broken and so unfun imm ajust remove it lol
+        response = "THIS EVENT IS DEPRECATED";
+        return false;
         if (arguments.Array[1] == "on")
         {
             Timing.RunCoroutine(Rand_sizes(), "rand_coroutine");
@@ -34,7 +39,7 @@ public class MiniMadness : ICommand
         }
 
         Log.Debug("Killing coroutine...");
-        var value = Timing.KillCoroutines("rand_coroutine");
+        int value = Timing.KillCoroutines("rand_coroutine");
         Log.Debug($"killed {value} coroutine");
         foreach (var player in Player.List)
         {
@@ -45,16 +50,16 @@ public class MiniMadness : ICommand
         response = "Killed coroutine and reset everyone to scale 1";
         return true;
     }
-
+    
     public IEnumerator<float> Rand_sizes()
     {
-        var random_int = new Random();
+        Random random_int = new Random();
         for (;;)
         {
             Log.Debug("start for iteration");
             foreach (var player in Player.List)
             {
-                var size = (float)random_int.Next(0, 3);
+                float size = random_int.Next(0, 3);
                 size = (float)(size * random_int.NextDouble());
                 Log.Debug($"rand = {size}");
                 if (size < 0.1f || size > 2.5f)
@@ -64,11 +69,10 @@ public class MiniMadness : ICommand
                 }
                 else
                 {
-                    player.Broadcast(new Exiled.API.Features.Broadcast($"{size}", 1));
+                    player.Broadcast(new Exiled.API.Features.Broadcast($"{size}", 1)); 
                     player.Scale = new Vector3(size, size, size);
-                }
+                }   
             }
-
             yield return Timing.WaitForSeconds(Nightmode.Instance.Config.Time_switching);
         }
     }
