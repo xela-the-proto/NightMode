@@ -34,9 +34,9 @@ public class Player
     /// <param name="e"></param>
     public static void OnPlayerSpawned(SpawnedEventArgs e)
     {
-        if (!e.Player.IsScp && e.Player.IsAlive && Nightmode.Instance.Config.nightmode_toggled)
+        if (!e.Player.IsScp && e.Player.IsAlive && Nightmode.Singleton.Config.nightmode_toggled)
         {
-            Log.Debug(Nightmode.Instance.Config.nightmode_toggled.ToString());
+            Log.Debug(Nightmode.Singleton.Config.nightmode_toggled.ToString());
             Log.Debug(
                 "Player hasn't got any flashlight giving one...");
             e.Player.AddItem(ItemType.Flashlight);

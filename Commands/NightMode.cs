@@ -70,15 +70,15 @@ public class NightMode : ICommand
             if (toggle)
             {
                 //toggle to let the server know if we need to give a torch
-                Nightmode.Instance.Config.nightmode_toggled = true;
+                Nightmode.Singleton.Config.nightmode_toggled = true;
                 response = "Turning the lights off...";
-                Log.Debug(Nightmode.Instance.Config.nightmode_toggled);
+                Log.Debug(Nightmode.Singleton.Config.nightmode_toggled);
                 return true;
             }
 
-            Nightmode.Instance.Config.nightmode_toggled = false;
+            Nightmode.Singleton.Config.nightmode_toggled = false;
             response = "Turning the lights on...";
-            Log.Debug(Nightmode.Instance.Config.nightmode_toggled);
+            Log.Debug(Nightmode.Singleton.Config.nightmode_toggled);
             return true;
         }
         catch (Exception e)
