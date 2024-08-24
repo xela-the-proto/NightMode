@@ -23,13 +23,11 @@ public class Server
     /// </summary>
     public static void onServerStarting()
     {
-        //hmm yes the biggest and ugliest hack bc it wont fucking load the config when starting/restarting
-        Exiled.API.Features.Server.ExecuteCommand("reload configs");
         
         AudioController.SpawnDummy(99);
-        if (Nightmode.Instance.Config.playOnLobby)
+        if (Nightmode.Singleton.Config.playOnLobby)
         {
-            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.lobbySong, true, 70f);
+            AudioController.PlayAudioFromFile(Nightmode.Singleton.Config.lobbySong, true, 70f);
         }
     }
 
@@ -43,26 +41,26 @@ public class Server
         //deprecated since the event itself was dodo
         //Exiled.API.Features.Server.ExecuteCommand("stuckService");
 
-        if (Nightmode.Instance.Config.playOnLobby)
+        if (Nightmode.Singleton.Config.playOnLobby)
         {
             AudioController.StopAudio();
         }
 
-        if (Nightmode.Instance.Config.eventRand)
+        Log.Debug("Roll for event? = " + Nightmode.Singleton.Config.eventRand);
+        Log.Debug("Probability for event? = " + Nightmode.Singleton.Config.percentage);
+        
+        if (Nightmode.Singleton.Config.eventRand && random.NextDouble() <= Nightmode.Singleton.Config.percentage/100)
         {
-            int events = Nightmode.Instance.Config.events.Length;
+            
+            int events = Nightmode.Singleton.Config.events.Length;
             Log.Debug("array length" + events);
             int rand = random.Next(0, events);
 
-            string command = Nightmode.Instance.Config.events[rand];
+            string command = Nightmode.Singleton.Config.events[rand];
             Log.Debug("command from list: " + command);
             Log.Debug("Index: " + rand);
+            Log.Debug("percentage = " + Nightmode.Singleton.Config.percentage/100);
             Exiled.API.Features.Server.ExecuteCommand(command + " on");
         }
-    }
-    public static void onRoundRestarting()
-    {
-        //hmm yes the biggest and ugliest hack bc it wont fucking load the config when starting/restarting
-        Exiled.API.Features.Server.ExecuteCommand("reload configs");
     }
 }

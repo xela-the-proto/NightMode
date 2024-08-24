@@ -73,7 +73,7 @@ public class MiniMadness : ICommand
                     player.Scale = new Vector3(size, size, size);
                 }   
             }
-            yield return Timing.WaitForSeconds(Nightmode.Instance.Config.Time_switching);
+            yield return Timing.WaitForSeconds(Nightmode.Singleton.Config.Time_switching);
         }
     }
 }

@@ -14,8 +14,8 @@ public class Nuke
     /// <param name="e"></param>
     public static void onNukeStart(StartingEventArgs e)
     {
-        if (Nightmode.Instance.Config.playOnNukeStart)
-            AudioController.PlayAudioFromFile(Nightmode.Instance.Config.nukeSong, true, 70f);
+        if (Nightmode.Singleton.Config.playOnNukeStart)
+            AudioController.PlayAudioFromFile(Nightmode.Singleton.Config.nukeSong, true, 70f);
     }
 
     /// <summary>
