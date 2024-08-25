@@ -16,7 +16,6 @@ Nightmode is a collection of random ideas i got while playing with my friends on
 **EXILED version**
 - **8.11.0** (Most of the time the mod will be on the latest version of exiled)
 
-**Additional info**
 **THIS MOD HAS DEPENDENCIES!** 
 - Depends on the AudioSystem plugin and its dependencies
 
