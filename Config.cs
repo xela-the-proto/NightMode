@@ -41,8 +41,10 @@ public class Config : IConfig
 
     [Description("Should a player get a new item if he flips a coin?")]
     public bool FlipRand { get; set; } = true;
+    
+    
 
-    [Description("Used for internal checks no touch thx")]
+    [Description("USED FOR EVENTS")]
     public bool nightmode_toggled { get; set; } = false;
 
     

@@ -15,8 +15,16 @@ public class Nightmode : Plugin<Config>
 {
     private int _patchesCounter;
 
+    public override string Name => "Nightmode";
+    
+    public override Version Version => new(1, 3, 1);
+    
+    public override string Author => "Xela";
+    
     public static Nightmode Singleton { get; private set; }
+    
     public override PluginPriority Priority { get; } = PluginPriority.Default;
+    
     private Harmony Harmony { get; set; }
 
     public override void OnEnabled()

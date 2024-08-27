@@ -11,7 +11,7 @@ public class ColorRoom : ICommand
     public bool SanitizeResponse { get; }
     public string Command { get; } = "colorallrooms";
     public string[] Aliases { get; } = { "car", "colallroo" };
-    public string Description { get; } = "color all rooms in the facility of a rgb color specified";
+    public string Description { get; } = "color all rooms in the facility with a specified rgb color";
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
@@ -22,12 +22,16 @@ public class ColorRoom : ICommand
 
             for (int i = 0; i < 4; i++)
             {
-                //skip first arg
                 if (i != 0)
                 {
                     if (float.TryParse(arguments.Array[i], out value))
-                        userColor[i - 1] += value / 255.0F;
-                    else throw new ArgumentException();
+                    {
+                        userColor[i - 1] += value / 255.0F; 
+                    }
+                    else
+                    {
+                        throw new ArgumentException();
+                    }
                 }
             }
 

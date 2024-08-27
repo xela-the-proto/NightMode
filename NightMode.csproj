@@ -104,10 +104,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Commands\ColorRoom.cs"/>
-        <Compile Include="Commands\MiniMadness.cs"/>
+        <Compile Include="Commands\MiniMadnessDEPRECATED.cs" />
         <Compile Include="Commands\NightMode.cs"/>
         <Compile Include="Commands\RemoteBroadcast.cs"/>
-        <Compile Include="Commands\Stuck.cs" />
         <Compile Include="Commands\Vanish.cs"/>
         <Compile Include="Config.cs"/>
         <Compile Include="FakeSync\FakeNightVis.cs"/>
