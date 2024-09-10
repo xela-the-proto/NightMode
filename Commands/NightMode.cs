@@ -51,30 +51,17 @@ public class NightMode : ICommand
                 }
                    
                 //iterate through every room and turn off the lights
-                foreach (var room in Room.List)
-                {
-                    if (!room.AreLightsOff)
-                    {
-                        room.TurnOffLights();
-                    }
-                }
+                Map.TurnOffAllLights(int.MaxValue);
                 Nightmode.Singleton.Config.nightmode_toggled = true;
                 response = "Turning the lights off...";
-                Log.Debug(Nightmode.Singleton.Config.nightmode_toggled);
+                
                 return true;
             }
             if (Nightmode.Singleton.Config.nightmode_toggled)
             {
+                Map.TurnOffAllLights(0);
                 Nightmode.Singleton.Config.nightmode_toggled = false;
                 response = "Turning the lights on...";
-                foreach (var room in Room.List)
-                {
-                    if (room.AreLightsOff)
-                    {
-                        room.RoomLightController.NetworkLightsEnabled = true;
-                    }
-                }
-                Log.Debug(Nightmode.Singleton.Config.nightmode_toggled);
                 return true;
             }
             

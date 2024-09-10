@@ -7,6 +7,8 @@ using Server_exiled_handler = Exiled.Events.Handlers.Server;
 using Server = NightMode.Handlers.Server;
 using Nuke_exiled_handler = Exiled.Events.Handlers.Warhead;
 using Nuke = NightMode.Handlers.Nuke;
+using Item_exiled_handler = Exiled.Events.Handlers.Item;
+using Item = NightMode.Handlers.Item;
 using PluginPriority = Exiled.API.Enums.PluginPriority;
 
 namespace NightMode;
@@ -79,14 +81,21 @@ public class Nightmode : Plugin<Config>
             Player_exiled_handler.ChangingRadioPreset += Player.OnPlayerChangingRadioRange;
         }
 
-        if (Singleton.Config.nightmode_toggled) Player_exiled_handler.Spawned += Player.OnPlayerSpawned;
+        if (Singleton.Config.nightmode_toggled)
+        {
+            Player_exiled_handler.Spawned += Player.OnPlayerSpawned;
+        }
 
-        if (Singleton.Config.FlipRand) Player_exiled_handler.FlippingCoin += Player.FlippingCoin;
+        if (Singleton.Config.FlipRand)
+        {
+            Player_exiled_handler.FlippingCoin += Player.FlippingCoin;
+        }
 
         Nuke_exiled_handler.Starting += Nuke.onNukeStart;
         Nuke_exiled_handler.Stopping += Nuke.onNukeStop;
         Server_exiled_handler.WaitingForPlayers += Server.onServerStarting;
         Server_exiled_handler.RoundStarted += Server.onRoundStart;
+        Item_exiled_handler.ChargingJailbird += Item.Charging;
     }
 
     private void UnregisterEvents()

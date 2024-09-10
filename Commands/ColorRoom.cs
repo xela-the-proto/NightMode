@@ -17,6 +17,12 @@ public class ColorRoom : ICommand
     {
         try
         {
+            if (arguments.Count <= 1)
+            {
+                Map.ChangeLightsColor(Color.white);
+                response = "Color reset!";
+                return true;  
+            }
             float value;
             float[] userColor = [0, 0, 0];
 
@@ -34,10 +40,9 @@ public class ColorRoom : ICommand
                     }
                 }
             }
-
             Color color = new Color(userColor[0], userColor[1], userColor[2]);
-            foreach (var item in Room.List) item.Color = color;
-
+            //Bruh i never knew this shit even existed :(
+            Map.ChangeLightsColor(color);
             response = "Color changed in all the facility!";
             return true;
         }

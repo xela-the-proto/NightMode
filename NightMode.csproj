@@ -110,6 +110,7 @@
         <Compile Include="Commands\Vanish.cs"/>
         <Compile Include="Config.cs"/>
         <Compile Include="FakeSync\FakeNightVis.cs"/>
+        <Compile Include="Handlers\Item.cs" />
         <Compile Include="Handlers\Nuke.cs"/>
         <Compile Include="Handlers\Player.cs"/>
         <Compile Include="Handlers\Server.cs"/>
