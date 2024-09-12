@@ -104,17 +104,15 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Commands\ColorRoom.cs"/>
-        <Compile Include="Commands\MiniMadness.cs"/>
         <Compile Include="Commands\NightMode.cs"/>
         <Compile Include="Commands\RemoteBroadcast.cs"/>
-        <Compile Include="Commands\Stuck.cs" />
         <Compile Include="Commands\Vanish.cs"/>
         <Compile Include="Config.cs"/>
         <Compile Include="FakeSync\FakeNightVis.cs"/>
+        <Compile Include="Handlers\Item.cs" />
         <Compile Include="Handlers\Nuke.cs"/>
         <Compile Include="Handlers\Player.cs"/>
         <Compile Include="Handlers\Server.cs"/>
-        <Compile Include="InternalCommands\StuckRoutine.cs" />
         <Compile Include="Nightmode.cs"/>
         <Compile Include="PlayerCommands\Info.cs"/>
         <Compile Include="PlayerCommands\PingUser.cs"/>
@@ -123,6 +121,9 @@
     <ItemGroup>
         <None Include="App.config"/>
         <None Include="packages.config"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="InternalCommands\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

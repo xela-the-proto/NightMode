@@ -16,7 +16,6 @@ public class NightMode : ICommand
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
-        bool toggle = false;
         string message_cassie =
             "Bell_start Attention all personnel an electric failure has been detected . . " +
             ". . . . . . pitch_.2 .g4 . .g4 pitch_0.7 Danger . all generators of the facility are " +
@@ -27,17 +26,17 @@ public class NightMode : ICommand
                                                           "switched to 939 automatically");
         try
         {
-            //check args
-            if (arguments.Array[1] == "on")
+            //check config
+            if (!Nightmode.Singleton.Config.nightmode_toggled)
             {
-                toggle = true;
                 //cassie message
                 Cassie.Message(message_cassie,
-                    true, true, true);
+                    true, true, false);
 
-                //if a player is a scp we need to switch em to the dog
+                //if a player is a scp we need to switch to the dog
                 //give every player a flashlight
                 foreach (var player in Player.List)
+                {
                     if (player.IsScp)
                     {
                         Log.Debug($"switching {player.Nickname} to 939");
@@ -49,42 +48,33 @@ public class NightMode : ICommand
                         Log.Debug($"giving {player.Nickname} a flashlight");
                         player.AddItem(ItemType.Flashlight);
                     }
-            }
-            else
-            {
-                toggle = false;
-            }
-
-            //iterate through every room and turn off the lights
-            Log.Debug("Trying NetworkLightsEnabled...");
-            foreach (var room in Room.List)
-                if (toggle)
-                {
-                    if (!room.AreLightsOff) room.TurnOffLights();
                 }
-                else if (toggle == false)
-                {
-                    if (room.AreLightsOff) room.RoomLightController.NetworkLightsEnabled = true;
-                }
-
-            if (toggle)
-            {
-                //toggle to let the server know if we need to give a torch
+                   
+                //iterate through every room and turn off the lights
+                Map.TurnOffAllLights(int.MaxValue);
                 Nightmode.Singleton.Config.nightmode_toggled = true;
                 response = "Turning the lights off...";
-                Log.Debug(Nightmode.Singleton.Config.nightmode_toggled);
+                
                 return true;
             }
+            if (Nightmode.Singleton.Config.nightmode_toggled)
+            {
+                Map.TurnOffAllLights(0);
+                Nightmode.Singleton.Config.nightmode_toggled = false;
+                response = "Turning the lights on...";
+                return true;
+            }
+            
+            //so the compiler stops bitching
+            response = "";
+            return false;
 
-            Nightmode.Singleton.Config.nightmode_toggled = false;
-            response = "Turning the lights on...";
-            Log.Debug(Nightmode.Singleton.Config.nightmode_toggled);
-            return true;
+
         }
         catch (Exception e)
         {
-            Log.Error("Bad command!");
-            response = "Bad command formatting! options are [on/off]";
+            Log.Error(e.Message);
+            response = e.Message;
             return false;
         }
     }

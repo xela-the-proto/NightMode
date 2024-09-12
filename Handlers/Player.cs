@@ -1,7 +1,9 @@
 ﻿using System;
 using Exiled.API.Enums;
 using Exiled.API.Features;
+using Exiled.API.Features.Attributes;
 using Exiled.Events.EventArgs.Player;
+using PluginAPI.Core.Items;
 using Random = System.Random;
 
 
@@ -54,19 +56,22 @@ public class Player
     {
         Random rand = new Random();
         Array val = Enum.GetValues(typeof(ItemType));
-        
-        if (!e.Player.SessionVariables.TryGetValue("flipped_success", out var flip_obj))
+
+        if (!e.Player.SessionVariables.ContainsKey("flipped_success"))
+        {
             e.Player.SessionVariables.Add("flipped_success", false);
+        }
         if (!e.IsTails && !(bool)e.Player.SessionVariables["flipped_success"])
         {
             ItemType item = (ItemType)val.GetValue(rand.Next(val.Length));
             Log.Debug("item is " + item);
             e.Player.AddItem(item);
             e.Player.SessionVariables["flipped_success"] = true;
-            e.Player.Broadcast(new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and you get " +
-                                                                 item, 5));
+            e.Player.Broadcast(new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and you get an item", 5));
         }
+        
     }
+    
 
     
 }

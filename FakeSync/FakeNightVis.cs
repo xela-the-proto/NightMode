@@ -20,6 +20,7 @@ public class FakeNightVis : ICommand
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
     {
+        //i will prolly use this for something eventually
         Player player = Player.Get(sender);
         Log.Debug("starting coroutine");
         //Timing.RunCoroutine(ChangeRoom(player), "CheckRoom");
