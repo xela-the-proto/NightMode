@@ -5,10 +5,9 @@ Nightmode is a collection of random ideas i got while playing with my friends on
 **Functionalities so far**
 - Events (Facility blackout only so far) 
 - Broadcast from the game console 
-- Vanish (WIP its very rudimental as it is right now)
+- Vanish 
 - Lots of tiny QoL to come (infinite radio is one)
 - "Minigames" (flip a coin to get a random item)
-- Change the color of all rooms in the facility with one command
 - Some client side commands
 
 **For now this plugin is very rudimentary and it'll probably constantly be updated as issues and ideas pop up**
