@@ -9,7 +9,6 @@ public class Item
     public static void Charging(ChargingJailbirdEventArgs e)
     {
         
-        
     }
 
 }
