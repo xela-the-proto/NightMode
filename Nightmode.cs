@@ -90,8 +90,7 @@ public class Nightmode : Plugin<Config>
         {
             Player_exiled_handler.FlippingCoin += Player.FlippingCoin;
         }
-
-        Nuke_exiled_handler.Starting += Nuke.onNukeStart;
+        
         Nuke_exiled_handler.Stopping += Nuke.onNukeStop;
         Server_exiled_handler.WaitingForPlayers += Server.onServerStarting;
         Server_exiled_handler.RoundStarted += Server.onRoundStart;
@@ -107,7 +106,6 @@ public class Nightmode : Plugin<Config>
         if (Singleton.Config.FlipRand) Player_exiled_handler.FlippingCoin -= Player.FlippingCoin;
 
         Player_exiled_handler.Spawned -= Player.OnPlayerSpawned;
-        Nuke_exiled_handler.Starting -= Nuke.onNukeStart;
         Nuke_exiled_handler.Stopping -= Nuke.onNukeStop;
         Server_exiled_handler.WaitingForPlayers -= Server.onServerStarting;
         Server_exiled_handler.RoundStarted -= Server.onRoundStart;

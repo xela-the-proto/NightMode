@@ -6,6 +6,8 @@ using UnityEngine;
 namespace NightMode.Commands;
 
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
+[CommandHandler(typeof(GameConsoleCommandHandler))]
+
 public class ColorRoom : ICommand
 {
     public bool SanitizeResponse { get; }

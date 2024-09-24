@@ -19,11 +19,11 @@ public class Config : IConfig
     
     [Description("List of possible events")]
     public string[] events { get; set; } = { "nightmode" };
-    
-    [Description("Play song when nuke starts")]
-    public bool playOnNukeStart { get; set; } = false;
 
-    public string nukeSong { get; set; } = "Hi_Fi_Rush_OST_Buzzsaw.ogg";
+    [Description("Time in seconds before nuke explodes (ONLY AFFECTS SPEEDRUN EVENT)")]
+    public float ev_speedrun_time { get; set; } = 300;
+    [Description("Song that plays when nuke starts (ONLY AFFECTS SPEEDRUN EVENT)")]
+    public string ev_speedrun_song { get; set; } = "youtube_7tTVYfgDf6g_1278x720_h264.ogg";
 
     [Description("Play song on lobby")] 
     public bool playOnLobby { get; set; } = false;

@@ -9,16 +9,6 @@ public class Nuke
     public static Nightmode Instance { get; }
 
     /// <summary>
-    ///     Plays audio when the nuke starts
-    /// </summary>
-    /// <param name="e"></param>
-    public static void onNukeStart(StartingEventArgs e)
-    {
-        if (Nightmode.Singleton.Config.playOnNukeStart)
-            AudioController.PlayAudioFromFile(Nightmode.Singleton.Config.nukeSong, true, 70f);
-    }
-
-    /// <summary>
     ///     Plays audio when the nuke stops
     /// </summary>
     /// <param name="e"></param>
