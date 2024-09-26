@@ -21,7 +21,6 @@ public class FakeNightVis : ICommand
     {
         //i will prolly use this for something eventually
         var player = Player.Get(sender);
-        Log.Debug("starting coroutine");
         //Timing.RunCoroutine(ChangeRoom(player), "CheckRoom");
         if (player.CheckPermission("nightmode.nightv"))
         {
