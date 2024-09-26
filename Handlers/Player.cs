@@ -1,9 +1,7 @@
 ﻿using System;
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using Exiled.API.Features.Attributes;
 using Exiled.Events.EventArgs.Player;
-using PluginAPI.Core.Items;
 using Random = System.Random;
 
 
@@ -18,7 +16,6 @@ public class Player
     public static void OnPlayerUsingRadioBattery(UsingRadioBatteryEventArgs e)
     {
         e.Drain = 0;
-        if (e.IsAllowed) e.IsAllowed = false;
     }
 
     /// <summary>
@@ -44,6 +41,7 @@ public class Player
             e.Player.AddItem(ItemType.Flashlight);
             e.Player.Broadcast(new Exiled.API.Features.Broadcast("You have been given a flashlight!"));
         }
+
         //save a players room in case they get stuck / clip out
         Exiled.API.Features.Server.ExecuteCommand("stuckService");
     }
@@ -54,24 +52,19 @@ public class Player
     /// <param name="e"></param>
     public static void FlippingCoin(FlippingCoinEventArgs e)
     {
-        Random rand = new Random();
-        Array val = Enum.GetValues(typeof(ItemType));
+        var rand = new Random();
+        var val = Enum.GetValues(typeof(ItemType));
 
         if (!e.Player.SessionVariables.ContainsKey("flipped_success"))
-        {
             e.Player.SessionVariables.Add("flipped_success", false);
-        }
         if (!e.IsTails && !(bool)e.Player.SessionVariables["flipped_success"])
         {
-            ItemType item = (ItemType)val.GetValue(rand.Next(val.Length));
+            var item = (ItemType)val.GetValue(rand.Next(val.Length));
             Log.Debug("item is " + item);
             e.Player.AddItem(item);
             e.Player.SessionVariables["flipped_success"] = true;
-            e.Player.Broadcast(new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and you get an item", 5));
+            e.Player.Broadcast(
+                new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and you get an item", 5));
         }
-        
     }
-    
-
-    
 }

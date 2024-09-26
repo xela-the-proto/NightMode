@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using CommandSystem;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
@@ -21,7 +20,7 @@ public class FakeNightVis : ICommand
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         //i will prolly use this for something eventually
-        Player player = Player.Get(sender);
+        var player = Player.Get(sender);
         Log.Debug("starting coroutine");
         //Timing.RunCoroutine(ChangeRoom(player), "CheckRoom");
         if (player.CheckPermission("nightmode.nightv"))
@@ -55,10 +54,10 @@ public class FakeNightVis : ICommand
 
     public IEnumerator<float> CheckRoom(Player p)
     {
-        Room lastRoom = p.CurrentRoom;
+        var lastRoom = p.CurrentRoom;
         for (;;)
         {
-            Room room = p.CurrentRoom;
+            var room = p.CurrentRoom;
             //sometimes moving too fast between room breaks it 
             //set the last room to off
             if (lastRoom.Identifier != room.Identifier)

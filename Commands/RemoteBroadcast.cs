@@ -1,7 +1,6 @@
 ﻿using System;
 using CommandSystem;
 using Exiled.API.Features;
-using UnityEngine;
 
 namespace NightMode.Commands;
 
@@ -18,10 +17,10 @@ public class RemoteBroadcast : ICommand
         try
         {
             ushort time = 0;
-            string message = "<color=red>[SERVER] <color=white>";
+            var message = "<color=red>[SERVER] <color=white>";
             ushort ushort_time = 0;
-            int i = 0;
-            
+            var i = 0;
+
             foreach (var item in arguments)
             {
                 if (i == 0)

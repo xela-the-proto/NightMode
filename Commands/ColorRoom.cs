@@ -7,7 +7,6 @@ namespace NightMode.Commands;
 
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
 [CommandHandler(typeof(GameConsoleCommandHandler))]
-
 public class ColorRoom : ICommand
 {
     public bool SanitizeResponse { get; }
@@ -23,26 +22,22 @@ public class ColorRoom : ICommand
             {
                 Map.ChangeLightsColor(Color.white);
                 response = "Color reset!";
-                return true;  
+                return true;
             }
+
             float value;
             float[] userColor = [0, 0, 0];
 
-            for (int i = 0; i < 4; i++)
-            {
+            for (var i = 0; i < 4; i++)
                 if (i != 0)
                 {
                     if (float.TryParse(arguments.Array[i], out value))
-                    {
-                        userColor[i - 1] += value / 255.0F; 
-                    }
+                        userColor[i - 1] += value / 255.0F;
                     else
-                    {
                         throw new ArgumentException();
-                    }
                 }
-            }
-            Color color = new Color(userColor[0], userColor[1], userColor[2]);
+
+            var color = new Color(userColor[0], userColor[1], userColor[2]);
             //Bruh i never knew this shit even existed :(
             Map.ChangeLightsColor(color);
             response = "Color changed in all the facility!";
