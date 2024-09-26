@@ -16,13 +16,13 @@ public class NightMode : ICommand
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
-        string message_cassie =
+        var message_cassie =
             "Bell_start Attention all personnel an electric failure has been detected . . " +
             ". . . . . . pitch_.2 .g4 . .g4 pitch_0.7 Danger . all generators of the facility are " +
             "shut pitch_0.5 jam_5_3 down pitch_.2 .g4 . .g4 pitch_0.9 All remaining personnel are " +
             "advised to enter the entrance zone until an M T F squad come to escort jam_5_3 you " +
             "pitch_.2 .g4 pitch_.5 .g4";
-        Exiled.API.Features.Broadcast broadcast = new Exiled.API.Features.Broadcast("<color=green> You were " +
+        var broadcast = new Exiled.API.Features.Broadcast("<color=green> You were " +
                                                           "switched to 939 automatically");
         try
         {
@@ -31,12 +31,11 @@ public class NightMode : ICommand
             {
                 //cassie message
                 Cassie.Message(message_cassie,
-                    true, true, false);
+                    true);
 
                 //if a player is a scp we need to switch to the dog
                 //give every player a flashlight
                 foreach (var player in Player.List)
-                {
                     if (player.IsScp)
                     {
                         Log.Debug($"switching {player.Nickname} to 939");
@@ -48,15 +47,15 @@ public class NightMode : ICommand
                         Log.Debug($"giving {player.Nickname} a flashlight");
                         player.AddItem(ItemType.Flashlight);
                     }
-                }
-                   
+
                 //iterate through every room and turn off the lights
                 Map.TurnOffAllLights(int.MaxValue);
                 Nightmode.Singleton.Config.nightmode_toggled = true;
                 response = "Turning the lights off...";
-                
+
                 return true;
             }
+
             if (Nightmode.Singleton.Config.nightmode_toggled)
             {
                 Map.TurnOffAllLights(0);
@@ -64,12 +63,10 @@ public class NightMode : ICommand
                 response = "Turning the lights on...";
                 return true;
             }
-            
+
             //so the compiler stops bitching
             response = "";
             return false;
-
-
         }
         catch (Exception e)
         {

@@ -14,8 +14,8 @@ public class PingUser : ICommand
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
-        Player player = Player.Get(sender);
-        int ping = player.Ping;
+        var player = Player.Get(sender);
+        var ping = player.Ping;
         response = "Pong! your ping is " + ping;
         return true;
     }

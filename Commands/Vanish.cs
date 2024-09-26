@@ -13,15 +13,15 @@ public class Vanish : ICommand
     public string Command { get; } = "vanish";
     public string[] Aliases { get; } = { "vn" };
     public string Description { get; } = "vanish like in minecraft (duh)";
-    
+
     //minecraft-ish vanish
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         try
         {
-            Player player = Player.Get(sender);
+            var player = Player.Get(sender);
 
-            string name = player.GroupName;
+            var name = player.GroupName;
             if (!player.IsEffectActive<Invisible>())
             {
                 player.GroupName = "";
@@ -31,17 +31,13 @@ public class Vanish : ICommand
                 response = "hiding...";
                 return true;
             }
-            else
-            {
-                player.DisableEffect<Invisible>();
-                player.GroupName = name;
-                player.BadgeHidden = false;
-                Log.Info("revealing " + player.Nickname + "with id" + player.Id);
-                response = "revealing...";
-                return false;
-            }
 
-            
+            player.DisableEffect<Invisible>();
+            player.GroupName = name;
+            player.BadgeHidden = false;
+            Log.Info("revealing " + player.Nickname + "with id" + player.Id);
+            response = "revealing...";
+            return false;
         }
         catch (Exception e)
         {
