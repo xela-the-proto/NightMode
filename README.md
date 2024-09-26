@@ -3,7 +3,7 @@
 
 Nightmode is a collection of random ideas i got while playing with my friends on a private server
 **Functionalities so far**
-- Events (Facility blackout only so far) 
+- Events (Facility blackout, speedrun) 
 - Broadcast from the game console 
 - Vanish 
 - Lots of tiny QoL to come (infinite radio is one)
