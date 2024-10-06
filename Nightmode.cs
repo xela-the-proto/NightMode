@@ -17,7 +17,7 @@ public class Nightmode : Plugin<Config>
 
     public override string Name => "Nightmode";
 
-    public override Version Version => new(1, 4, 0);
+    public override Version Version => new(1, 4, 1);
 
     public override string Author => "Xela";
 
