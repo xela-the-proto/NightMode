@@ -1,5 +1,6 @@
 ﻿using AudioPlayer.API;
 using Exiled.API.Features;
+using Exiled.Events.EventArgs.Server;
 using PluginAPI.Events;
 using Random = System.Random;
 
@@ -54,5 +55,10 @@ public class Server
             Log.Debug("percentage = " + Nightmode.Singleton.Config.percentage / 100);
             Exiled.API.Features.Server.ExecuteCommand(command + " on");
         }
+    }
+
+    public static void teamSpawn(RespawnedTeamEventArgs e)
+    {
+            
     }
 }

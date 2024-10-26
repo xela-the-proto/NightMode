@@ -12,4 +12,8 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CSteamLibrary_005Csteamapps_005Ccommon_005CSCP_0020Secret_0020Laboratory_0020Dedicated_0020Server_005CSCPSL_005FData_005CManaged_005CAssembly_002DCSharp_002DPublicized_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CSteamLibrary_005Csteamapps_005Ccommon_005CSCP_0020Secret_0020Laboratory_0020Dedicated_0020Server_005CSCPSL_005FData_005CManaged_005CMirror_002DPublicized_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CSteamLibrary_005Csteamapps_005Ccommon_005CSCP_0020Secret_0020Laboratory_0020Dedicated_0020Server_005CSCPSL_005FData_005CManaged_005CUnityEngine_002ECoreModule_002DPublicized_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Users\thega\.nuget\packages\exiled-official\8.12.2" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Users\thega\RiderProjects\NightMode\packages\EXILED-OFFICIAL.8.12.2" Loaded="True" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
 	</wpf:ResourceDictionary>

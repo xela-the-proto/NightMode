@@ -19,9 +19,9 @@ public class Speedrun : ICommand
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         var countdown = new broadcast("", 1);
-        foreach (var door in Door.List)
-            //ik door.lockall exists but i trust this more
-            door.Lock(10000f, DoorLockType.AdminCommand);
+        foreach (var door in Door.List) 
+        //ik door.lockall exists but i trust this more
+        door.Lock(10000f, DoorLockType.AdminCommand);
         foreach (var p in Player.List)
         {
             p.Role.Set(RoleTypeId.ClassD);
@@ -70,7 +70,7 @@ public class Speedrun : ICommand
         }
 
         AudioController.PlayAudioFromFile(Nightmode.Singleton.Config.ev_speedrun_song, true, 200f);
-        Timing.RunCoroutine(Nuke());
+        Timing.RunCoroutine(Nuke(),"nuke_routine");
     }
 
     public IEnumerator<float> Nuke()

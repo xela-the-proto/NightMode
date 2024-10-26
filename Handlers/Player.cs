@@ -1,7 +1,10 @@
 ﻿using System;
+using AudioPlayer.API;
 using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
+using MEC;
+using UnityEngine;
 using Random = System.Random;
 
 
@@ -67,4 +70,16 @@ public class Player
                 new Exiled.API.Features.Broadcast("Luck smiles on you you flip heads and you get an item", 5));
         }
     }
+
+    public static void Escaping(EscapingEventArgs e)
+    {
+        if (e.EscapeScenario == EscapeScenario.ClassD && Nightmode.Singleton.Config.speedrun_toggled)
+        {
+            Timing.KillCoroutines("nuke_routine");
+            AudioController.StopAudio();
+            Map.ChangeLightsColor(Color.green);
+            Round.EndRound();
+        }
+    }
+    
 }

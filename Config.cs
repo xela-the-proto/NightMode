@@ -5,6 +5,11 @@ namespace NightMode;
 
 public class Config : IConfig
 {
+    [Description("Determines if the plugin should be enabled or disabled.")]
+    public bool IsEnabled { get; set; } = true;
+
+    [Description("Debug mode?")] public bool Debug { get; set; } = false;
+    
     [Description("Sets if at the start of the round the server can roll a random event")]
     public bool eventRand { get; set; } = true;
 
@@ -36,10 +41,12 @@ public class Config : IConfig
     public bool FlipRand { get; set; } = true;
 
 
-    [Description("USED FOR EVENTS")] public bool nightmode_toggled { get; set; } = false;
+    [Description("from here on out all config will be used for internal stuff DO NOT EDIT")]
+    public int literally_does_nothing_so_the_compiler_doesnt_fucking_complain = 0;
 
-    [Description("Determines if the plugin should be enabled or disabled.")]
-    public bool IsEnabled { get; set; } = true;
+    [Description("nightmode_activation")] public bool nightmode_toggled { get; set; } = false;
+    [Description("speedrun_activation")] public bool speedrun_toggled { get; set; } = false;
 
-    [Description("Debug mode?")] public bool Debug { get; set; } = false;
+
+    
 }
