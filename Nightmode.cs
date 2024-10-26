@@ -1,4 +1,5 @@
 ﻿using System;
+using AudioPlayer.Commands.SubCommands;
 using Exiled.API.Features;
 using HarmonyLib;
 using Player_exiled_handler = Exiled.Events.Handlers.Player;
@@ -17,7 +18,7 @@ public class Nightmode : Plugin<Config>
 
     public override string Name => "Nightmode";
 
-    public override Version Version => new(1, 4, 1);
+    public override Version Version => new(1, 5, 0);
 
     public override string Author => "Xela";
 
@@ -80,6 +81,8 @@ public class Nightmode : Plugin<Config>
         Server_exiled_handler.WaitingForPlayers += Server.onServerStarting;
         Server_exiled_handler.RoundStarted += Server.onRoundStart;
         Item_exiled_handler.ChargingJailbird += Item.Charging;
+        Player_exiled_handler.Escaping += Player.Escaping;
+        Server_exiled_handler.RespawnedTeam += Server.teamSpawn;
     }
 
     private void UnregisterEvents()
