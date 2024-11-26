@@ -1,4 +1,4 @@
-
+## NO LONGER MAINTAINED (got bored of the project and i lacked ideas)
 # Nightmode
 
 Nightmode is a collection of random ideas i got while playing with my friends on a private server
